@@ -1,0 +1,393 @@
+import type { Content } from "./site";
+
+/**
+ * Hungarian translation — same restaurant (Wiener Neustadt), Hungarian language.
+ * Must match the `Content` shape defined by `de` in ./site.ts.
+ */
+export const hu: Content = {
+  locale: "hu",
+  name: "Chen's Cooking",
+  tagline: "Sushi · Teppanyaki · Wok",
+  city: "Sopron",
+
+  contact: {
+    phone: "+36 99 505 337",
+    phoneHref: "tel:+3699505337",
+    email: "reservierung@chens-cooking.at",
+    address: {
+      street: "Határdomb út 1-2",
+      zip: "9400",
+      city: "Sopron",
+      country: "Magyarország",
+    },
+    mapsQuery: "Határdomb út 1-2, 9400 Sopron, Magyarország",
+  },
+
+  social: {
+    instagram: {
+      handle: "@chens_cooking_2700",
+      url: "https://www.instagram.com/chens_cooking_2700/",
+    },
+  },
+
+  promo: {
+    label: "Happy Night",
+    when: "Minden szerdán",
+    headline: "Italok all inclusive.",
+    text: "Rendeld az elsőt — utána minden ital ingyenes!",
+    price: "8890 Ft",
+    href: "#kontakt",
+  },
+
+  hours: {
+    label: "Nyitvatartás",
+    range: "11:30 – 22:00",
+    note: "Csütörtökön zárva.",
+    days: [
+      { day: "Hétfő", time: "11:30 – 22:00" },
+      { day: "Kedd", time: "11:30 – 22:00" },
+      { day: "Szerda", time: "11:30 – 22:00" },
+      { day: "Csütörtök", time: "Zárva" },
+      { day: "Péntek", time: "11:30 – 22:00" },
+      { day: "Szombat", time: "11:30 – 22:00" },
+      { day: "Vasárnap", time: "11:30 – 22:00" },
+    ],
+  },
+
+  hero: {
+    eyebrow: "All-you-can-eat · Sopron",
+    headline: ["Frissen.", "A szeme előtt.", "Határtalanul."],
+    sub: "Sushi a pultról, teppanyaki a forró lapról, wok az Ön ízlése szerint. Egy büfé, amely úgy főz, mint egy étterem.",
+    primaryCta: "Asztalfoglalás",
+    secondaryCta: "Fedezze fel a büfét",
+    takeawayLink: "Vagy rendeljen elvitelre",
+    image: "/images/hero-teppanyaki.svg",
+    imageAlt: "Szakácsnő friss garnélát és zöldséget grillez az izzó teppanyaki lapon",
+  },
+
+  about: {
+    eyebrow: "Az ötlet",
+    title: "Nem szokványos büfé. Egy konyha, amely él.",
+    body: [
+      "A Chen's Cookingnál nem melegítünk — főzünk. A nyitott állomásoknál láthatja, ahogy a sushit tekerik, a garnélát a teppanyakin forgatják, és a wok-ételét másodpercek alatt készítik el a lángon.",
+      "Prémium minőség, amely à la carte érzést kelt, az all-you-can-eat szabadságával. Friss alapanyagok, becsületes kézművesség és annyi, amennyit csak élvezni szeretne.",
+    ],
+    stats: [
+      { value: "3", label: "Élő állomás" },
+      { value: "100+", label: "Étel naponta" },
+      { value: "Naponta", label: "Frissen készítve" },
+    ],
+    image: "/images/about-sushi-counter.svg",
+    imageAlt: "Frissen készített sushi- és sashimi-tál a Chen's Cooking pultjánál",
+  },
+
+  stations: {
+    eyebrow: "Élő állomások",
+    title: "Három színpad. Egy ízélmény.",
+    items: [
+      {
+        name: "Sushi Bar",
+        desc: "Legyen szó sushiról, makiról vagy sashimiról — a nyers hallal való főzés japán hagyománya az egyedülálló ízvilág mellett számos további előnyt kínál. Gazdag tápanyagforrás, tele vitaminokkal és ásványi anyagokkal, koleszterinszint-csökkentő és gazdag a jótékony zsírsavakban.",
+        image: "/images/station-sushi.svg",
+        alt: "A sushimester friss makit teker a pultnál",
+      },
+      {
+        name: "Teppanyaki Grill",
+        desc: "Ennek a hagyományos japán grillnek a nagy rozsdamentes acél felülete mindig állandó hőmérsékletet tart, így az aromák, vitaminok és ásványi anyagok megmaradnak az alapanyagokban — anélkül, hogy az egymás mellett fekvő hozzávalók illata és íze összekeveredne. Tökéletes húshoz, halhoz és zöldséghez.",
+        image: "/images/station-teppanyaki.svg",
+        alt: "Lángok és gőz a teppanyaki grilllapon zöldséggel és hússal",
+      },
+      {
+        name: "Wok Station",
+        desc: "A wokban készült ételeket különösen ízletes aroma jellemzi. Az ívelt serpenyő magas hőmérséklete röviden tartja a sütési időt — a zöldség ropogós marad, a vitaminok megmaradnak. És mivel szinte semmi zsír nem kell hozzá, a wok-ételek nemcsak finomak, hanem nagyon egészségesek is.",
+        image: "/images/station-wok.svg",
+        alt: "Lángoló wok tésztával és zöldséggel nyílt lángon",
+      },
+    ],
+  },
+
+  experience: {
+    eyebrow: "A büfé",
+    title: "És még sokkal több.",
+    points: [
+      {
+        title: "Kínai konyha",
+        desc: "Gazdag büfénk a klasszikus levesek mellett meleg kínai elő- és főételek nagy választékát is kínálja. A hús- és halételek mellett vegetáriánus fogásokat és számos szószt is talál.",
+      },
+      {
+        title: "Salátabár",
+        desc: "Salátabárunk naponta friss salátaváltozatok széles kínálatát, valamint különféle olaj- és ecetfajtákat kínál. A klasszikus ázsiai fajtáktól a hagyományos osztrák burgonyasalátáig — itt mindenki talál valamit.",
+      },
+      {
+        title: "À la carte",
+        desc: "Aki nem a nagy büféből szeretne lakmározni, nyugodtan kérheti munkatársainktól az étlapot, és à la carte rendelheti meg kívánt fogását. Frissen elkészítjük, és közvetlenül az asztalához visszük.",
+      },
+      {
+        title: "Desszert",
+        desc: "A kulináris befejezéshez sült gyümölcsök és kompótok választékát tartjuk készenlétben — de tipikus osztrák desszerteket is, mint a torta és a fagylalt.",
+      },
+    ],
+  },
+
+  pricing: {
+    eyebrow: "Büfé & árak",
+    title: "Egy ár. Határtalan élvezet.",
+    note: "Az italok nincsenek benne. Az árak személyenként értendők.",
+    plans: [
+      {
+        name: "Ebédbüfé",
+        when: "H – P · 11:30 – 17:00",
+        price: "6190",
+        featured: false,
+        includes: [
+          "Teppanyaki grillel együtt",
+          "Levesek & előételek",
+          "Kínai főételek",
+          "Wok-hozzávalók",
+          "Saláta- & sushibár",
+          "Desszert",
+        ],
+      },
+      {
+        name: "Vacsora",
+        when: "H – P 17:00-tól",
+        price: "7590",
+        featured: true,
+        includes: [
+          "Levesek & előételek",
+          "Kínai főételek",
+          "Wok-állomás",
+          "Teppanyaki-hozzávalók",
+          "Sushi- & salátabár",
+          "Extra maki & sashimi",
+          "Desszert",
+        ],
+      },
+      {
+        name: "Hétvége & ünnepnap",
+        when: "Szo, V & ünnepnapok · egész nap",
+        price: "9990",
+        featured: false,
+        includes: [
+          "Teljes esti kínálat",
+          "Levesek & előételek",
+          "Kínai főételek",
+          "Wok & teppanyaki",
+          "Sushi- & salátabár",
+          "Extra maki & sashimi",
+          "Desszert",
+        ],
+      },
+    ],
+    kids: {
+      title: "A legkisebbeknek",
+      tiers: [
+        { age: "0 – 3 év", price: "Ingyenes" },
+        { age: "4 – 7 év", price: "4190 Ft" },
+        { age: "5 – 8 év", price: "7590 Ft" },
+      ],
+    },
+  },
+
+  takeaway: {
+    eyebrow: "Étlap",
+    title: "Étlapunk",
+    sub: "Levesek, előételek, wok-ételek, sushi és még sok más – frissen elkészítve, helyben vagy elvitelre.",
+    pickupNote: "Minden ár forintban (Ft), az áfát tartalmazza. A változtatás jogát fenntartjuk.",
+    orderCtaLabel: "Rendeljen most telefonon",
+    pdfHref: "/menu/chens-speisekarte.pdf",
+    pdfLabel: "Teljes étlap PDF-ben",
+    drinksHref: "/menu/chens-getraenkekarte-2025.pdf",
+    drinksLabel: "Itallap (PDF)",
+    categories: [
+      {
+        name: "Levesek",
+        note: "",
+        items: [
+          { code: "V1", name: "Pikáns leves", price: "1190", desc: "édes-savanyú" },
+          { code: "V2", name: "Csirkeleves bambusszal és gombával", price: "1190", desc: "" },
+          { code: "V3", name: "Tenger gyümölcsei leves", price: "1390", desc: "" },
+          { code: "V4", name: "Miso (tofu) leves", price: "1090", desc: "" },
+          { code: "V5", name: "Zöldségleves", price: "1090", desc: "" },
+        ],
+      },
+      {
+        name: "Előételek",
+        note: "",
+        items: [
+          { code: "V6", name: "Vegetáriánus tavaszi tekercs", price: "890", desc: "5 db" },
+          { code: "V8", name: "Gomba sütve", price: "1090", desc: "" },
+          { code: "V9", name: "Kyosa", price: "1090", desc: "5 db tésztapárna hússal és zöldséggel töltve" },
+          { code: "V10", name: "Sateh Ayam", price: "1190", desc: "2 db csirkenyárs salátaágyon" },
+          { code: "V11", name: "Garnéla nyárson salátával", price: "1190", desc: "3 db" },
+        ],
+      },
+      {
+        name: "Saláták",
+        note: "",
+        items: [
+          { code: "V12", name: "Kínai pikáns káposztasaláta", price: "990", desc: "" },
+          { code: "V13", name: "Szójacsíra saláta", price: "990", desc: "" },
+          { code: "V14", name: "Uborkasaláta", price: "1090", desc: "" },
+          { code: "V15", name: "Rák saláta", price: "1490", desc: "helyben készített koktélszósszal" },
+          { code: "V16", name: "Vegyes saláta", price: "1190", desc: "" },
+        ],
+      },
+      {
+        name: "Főételek",
+        note: "",
+        items: [
+          { code: "H1", name: "Tenger gyümölcsei piros curryvel", price: "3590", desc: "" },
+          { code: "H2", name: "Ropogós kacsa", price: "3490", desc: "" },
+          { code: "H3", name: "Ropogós kacsa nyolcféle finomsággal", price: "3790", desc: "párolóedényben készült" },
+          { code: "H4", name: "Ropogós kacsa mangóval", price: "3790", desc: "" },
+          { code: "H5", name: "Pirított tészta ropogós kacsával", price: "3190", desc: "választható fokhagyma vagy curry szósszal" },
+          { code: "H6", name: "Ropogós csirkehúsfalatok", price: "2890", desc: "" },
+          { code: "H7", name: "Szezámmagos csirkehúsfalatok", price: "2890", desc: "" },
+          { code: "H8", name: "Citromos csirkehúsfalatok", price: "2890", desc: "" },
+          { code: "H9", name: "Kan-Bian csirke", price: "2890", desc: "WOK-ban készült zöldséges csirke, csípős" },
+          { code: "H10", name: "Illatos-omlós csirke bambuszrüggyel és gombával", price: "2890", desc: "" },
+          { code: "H11", name: "Pirított tészta ropogós csirkefalatokkal", price: "2890", desc: "" },
+          { code: "H12", name: "Párolt tenger gyümölcsei", price: "3590", desc: "" },
+          { code: "H13", name: "Kan-Bian marha", price: "2890", desc: "WOK-ban készült zöldséges marha, csípős" },
+          { code: "H14", name: "Sa-Za Beef", price: "2890", desc: "marhahús brokkolival" },
+          { code: "H15", name: "Pirított tészta omlós csirkehússal", price: "2890", desc: "" },
+          { code: "H16", name: "Sült rizs omlós csirkehússal", price: "2890", desc: "" },
+        ],
+      },
+      {
+        name: "Ramen & Udon",
+        note: "tartalmas leves egytálétel, főételként fogyasztható",
+        items: [
+          { code: "H17", name: "Ramen zöldséggel", price: "2290", desc: "csípős, kínai tojásos tészta" },
+          { code: "H18", name: "Udon zöldséggel", price: "2290", desc: "búzalisztből készült tészta" },
+          { code: "H18A", name: "Kacsa ramen", price: "2790", desc: "" },
+          { code: "H19", name: "Ramen tenger gyümölcseivel", price: "2790", desc: "csípős, kínai tojásos tészta" },
+          { code: "H20", name: "Udon tenger gyümölcseivel", price: "2790", desc: "szójával ízesített tészta" },
+        ],
+      },
+      {
+        name: "Köretek",
+        note: "",
+        items: [
+          { code: "H21", name: "Jázmin rizs", price: "690", desc: "" },
+          { code: "H22", name: "Sült tojásos jázmin rizs", price: "1090", desc: "" },
+          { code: "H23", name: "Pirított tészta zöldséggel", price: "1190", desc: "" },
+        ],
+      },
+      {
+        name: "Desszertek",
+        note: "",
+        items: [
+          { code: "H24", name: "Vegyes egzotikus gyümölcsök", price: "1290", desc: "" },
+          { code: "H25", name: "Lychee kompót", price: "990", desc: "" },
+          { code: "H26", name: "Sült gyümölcsök mézzel és szezámmal", price: "1290", desc: "választható: banán, ananász, alma" },
+          { code: "H27", name: "Puding", price: "1090", desc: "kókusz" },
+          { code: "H28", name: "Tiramisu", price: "1090", desc: "" },
+        ],
+      },
+      {
+        name: "Sushi",
+        note: "",
+        items: [
+          { code: "S1", name: "Sushi szett kicsi", price: "2390", desc: "6 db + 4 db maki" },
+          { code: "S2", name: "Sushi szett közepes", price: "2890", desc: "8 db + 4 db maki" },
+          { code: "S3", name: "Sushi szett nagy", price: "3390", desc: "10 db + 4 db maki" },
+          { code: "S4", name: "Sake szett", price: "2890", desc: "8 db + 3 db maki; csak lazac" },
+          { code: "S5", name: "Sake szett", price: "3390", desc: "10 db + 3 db maki; csak lazac" },
+          { code: "S6", name: "Maguro szett", price: "3490", desc: "8 db + 3 db maki; csak tonhal" },
+          { code: "S7", name: "Sake-Maguro szett", price: "3290", desc: "8 db + 3 db maki" },
+          { code: "S8", name: "Sake-Maguro szett", price: "3490", desc: "10 db + 3 db maki" },
+          { code: "S9", name: "Super-Mix", price: "1990", desc: "12 db: lazac, tonhal, uborka, avokádó" },
+          { code: "S10", name: "Super-Mix", price: "2690", desc: "18 db: lazac, tonhal, uborka, avokádó" },
+          { code: "S11", name: "Maki-Mix", price: "1990", desc: "12 db: lazac, tonhal" },
+          { code: "S12", name: "Maki-Mix", price: "2390", desc: "18 db: lazac, tonhal" },
+          { code: "S13", name: "Maki-Mix", price: "1890", desc: "12 db: avokádó, uborka" },
+          { code: "S14", name: "Maki-Mix", price: "2390", desc: "18 db: avokádó, uborka" },
+          { code: "S15", name: "Sake-Mix", price: "1990", desc: "12 db: lazaccal" },
+          { code: "S16", name: "Sake-Mix", price: "2390", desc: "18 db: lazaccal" },
+          { code: "S17", name: "Futomaki", price: "2890", desc: "10 db, vastag tekercs surimivel és zöldséggel" },
+          { code: "S18", name: "California-Maki", price: "2890", desc: "10 db, vastag tekercs garnélával, surimivel, avokádóval" },
+          { code: "S19", name: "Sushi Box", price: "7790", desc: "" },
+        ],
+      },
+      {
+        name: "Szószok",
+        note: "490 Ft / db",
+        items: [
+          { code: "", name: "Fokhagyma szósz", price: "490", desc: "" },
+          { code: "", name: "Gong Bao szósz", price: "490", desc: "csípős kínai Hoisin chilivel és fokhagymával" },
+          { code: "", name: "Thai-Curry szósz", price: "490", desc: "" },
+          { code: "", name: "Fekete bors szósz", price: "490", desc: "húsételekhez és tenger gyümölcseihez" },
+          { code: "", name: "Nyolc kincs szósz", price: "490", desc: "csípős kínai szósz chilivel" },
+          { code: "", name: "Teriyaki szósz", price: "490", desc: "édeskés, fokhagymás" },
+          { code: "", name: "Szója szósz", price: "490", desc: "" },
+          { code: "", name: "Mangó szósz", price: "490", desc: "" },
+        ],
+      },
+    ],
+    allergenNote:
+      "Az allergéninformációkat (A–R) kérjük, a PDF-étlapon tekintse meg, vagy kérdezze munkatársainkat.",
+  },
+
+  reservation: {
+    eyebrow: "Asztalfoglalás",
+    title: "Foglalja le asztalát",
+    sub: "Foglaljon egy percnél is rövidebb idő alatt. Foglalását telefonon vagy e-mailben visszaigazoljuk.",
+    success: "Köszönjük! Foglalási kérelme megérkezett. Hamarosan jelentkezünk a visszaigazolással.",
+    error: "Valami hiba történt. Kérjük, próbálja újra, vagy hívjon minket.",
+  },
+
+  nav: [
+    { label: "Ötlet", href: "#idee" },
+    { label: "Állomások", href: "#stationen" },
+    { label: "Büfé", href: "#erlebnis" },
+    { label: "Árak", href: "#preise" },
+    { label: "Elvitel", href: "#mitnehmen" },
+    { label: "Kapcsolat", href: "#kontakt" },
+  ],
+
+  ui: {
+    mainNav: "Főnavigáció",
+    menu: "Menü",
+    menuOpen: "Menü megnyitása",
+    menuClose: "Menü bezárása",
+    popular: "Népszerű",
+    perPerson: "/ személy",
+    contactPhone: "Telefon",
+    contactAddress: "Cím",
+    route: "Útvonal",
+    daily: "Naponta",
+    callAria: "Hívás",
+    footerVisit: "Látogasson el hozzánk",
+    footerDiscover: "Fedezze fel",
+    footerBlurb:
+      "All-you-can-eat sushi-bárral, teppanyaki-grillel és wok-állomással — frissen, az Ön szeme előtt készítve Sopronban.",
+    langLabel: "Nyelv",
+    form: {
+      name: "Név",
+      phone: "Telefon",
+      email: "E-mail",
+      date: "Dátum",
+      time: "Időpont",
+      guests: "Személyek",
+      message: "Megjegyzés",
+      phName: "Az Ön neve",
+      phPhone: "+36 …",
+      phEmail: "nev@email.hu",
+      phGuests: "Válasszon létszámot",
+      phMessage: "Allergiák, etetőszék, különleges alkalom …",
+      helper: "Foglalását telefonon vagy e-mailben visszaigazoljuk.",
+      person: "személy",
+      persons: "személy",
+      submit: "Foglalás elküldése",
+      submitting: "Küldés folyamatban …",
+      successTitle: "Foglalás elküldve",
+      another: "Új foglalás",
+    },
+  },
+
+  legal: {
+    copyright: `© ${new Date().getFullYear()} Chen's Cooking · Sopron`,
+  },
+};

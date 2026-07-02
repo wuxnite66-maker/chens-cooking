@@ -1,0 +1,14 @@
+﻿import puppeteer from "puppeteer";
+import fs from "fs";
+const dir = process.argv[2];
+let html = fs.readFileSync(dir+"/drinks.html","utf8");
+const logo = fs.readFileSync(dir+"/logo_cut.png").toString("base64");
+html = html.replace("__LOGO__", "data:image/png;base64,"+logo);
+const b = await puppeteer.launch({ headless:"new", args:["--no-sandbox"] });
+const p = await b.newPage();
+await p.setViewport({ width:1487, height:1060, deviceScaleFactor:2 });
+await p.setContent(html, { waitUntil:"networkidle0" });
+await p.screenshot({ path: dir+"/preview2.png" });
+await p.pdf({ path: dir+"/getraenkekarte.pdf", printBackground:true, preferCSSPageSize:true });
+await b.close();
+console.log("rendered", fs.statSync(dir+"/getraenkekarte.pdf").size, "bytes");

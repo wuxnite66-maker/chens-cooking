@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Elegant dark-marble theme: deep green-black canvas + refined gold.
+     --ink is the solid dark base (footer, fields, chips); surfaces are
+     slightly translucent so the marble shimmers through. */
+  --ink: #0c0d0a;
+  --surface: rgba(19, 20, 15, 0.72);
+  --surface-2: rgba(30, 30, 22, 0.78);
+  --line: rgba(201, 162, 75, 0.2);
+  --cream: #f6f1e9; /* primary text (light) */
+  --muted: #a8a08f; /* secondary text */
+  --gold: #c9a24b;
+  --gold-soft: #e3c77e;
+  --gold-deep: #9a7b34;
+  --lacquer: #cf5a49;
+  --on-accent: #1b130b; /* text on gold */
+
+  --header-h: 76px;
+  --promo-h: 44px;
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + var(--promo-h) + 8px);
+  -webkit-text-size-adjust: 100%;
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-130%);
+  }
+  55%,
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+body {
+  background-color: var(--ink);
+  color: var(--cream);
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Fixed marble backdrop (own layer → smooth on mobile too), with a soft
+   dark scrim so text and cards stay perfectly readable. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(9, 10, 8, 0.5), rgba(7, 8, 6, 0.68)),
+    url("/images/marble-bg.jpg") center / cover no-repeat;
+}
+
+/* Tabular figures for prices so columns don't shift */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Eyebrow / kicker label */
+.kicker {
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* Thin gold rule */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold) 35%,
+    var(--gold) 65%,
+    transparent
+  );
+  opacity: 0.4;
+}
+
+/* Skeleton shimmer for image slots before load */
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  animation: shimmer 1.6s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Visible, on-brand focus ring (never removed) */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--gold-soft);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Respect reduced motion globally as a safety net */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom selection */
+::selection {
+  background: var(--gold);
+  color: #0b0a09;
+}
