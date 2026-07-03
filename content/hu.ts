@@ -35,7 +35,7 @@ export const hu: Content = {
     when: "Minden szerdán",
     headline: "Italok all inclusive.",
     text: "Rendeld az elsőt — utána minden ital ingyenes!",
-    price: "8890 Ft",
+    price: "8590 Ft",
     href: "#kontakt",
   },
 

@@ -39,7 +39,7 @@ export const de = {
     when: "Jeden Mittwoch",
     headline: "Getränke all-inclusive.",
     text: "1. Getränk bestellen — danach ist jedes weitere gratis!",
-    price: "8890 Ft",
+    price: "8590 Ft",
     href: "#kontakt",
   },
 
