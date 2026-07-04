@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { site } from "@/content/site";
+import { calendarConfigured, createCalendarEvent } from "@/lib/calendar";
 
 /**
  * Reservation endpoint.
@@ -128,6 +129,25 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors }, { status: 422 });
   }
 
+  // Google Calendar (best-effort — never blocks the reservation).
+  let calendarAdded = false;
+  if (calendarConfigured()) {
+    try {
+      await createCalendarEvent({
+        name: data.name!.trim(),
+        phone: data.phone,
+        email: data.email,
+        date: data.date!,
+        time: data.time!,
+        guests: data.guests,
+        message: data.message,
+      });
+      calendarAdded = true;
+    } catch (e) {
+      console.error("[reservation] calendar error:", e);
+    }
+  }
+
   // Treat empty / leftover-placeholder values as "not configured" so demos
   // keep working instead of failing on an invalid key.
   const rawKey = process.env.RESEND_API_KEY?.trim();
@@ -144,7 +164,7 @@ export async function POST(req: Request) {
       "[reservation] RESEND_API_KEY not set — email NOT sent. Logging instead:",
     );
     console.info(text);
-    return NextResponse.json({ ok: true, delivered: false });
+    return NextResponse.json({ ok: true, delivered: false, calendar: calendarAdded });
   }
 
   try {
@@ -160,15 +180,22 @@ export async function POST(req: Request) {
 
     if (error) {
       console.error("[reservation] Resend error:", error);
+      // If the booking already landed in the calendar, don't fail the guest.
+      if (calendarAdded) {
+        return NextResponse.json({ ok: true, delivered: false, calendar: true });
+      }
       return NextResponse.json(
         { ok: false, error: "Versand fehlgeschlagen." },
         { status: 502 },
       );
     }
 
-    return NextResponse.json({ ok: true, delivered: true });
+    return NextResponse.json({ ok: true, delivered: true, calendar: calendarAdded });
   } catch (err) {
     console.error("[reservation] send failed:", err);
+    if (calendarAdded) {
+      return NextResponse.json({ ok: true, delivered: false, calendar: true });
+    }
     return NextResponse.json(
       { ok: false, error: "Versand fehlgeschlagen." },
       { status: 502 },
