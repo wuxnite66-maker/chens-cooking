@@ -1,257 +1,113 @@
-# Google Calendar Auto-Eintrag — Schritt für Schritt
+# Google Kalender Auto-Eintrag — Schritt für Schritt
 
-Wenn jemand auf deiner Website **Tisch reservieren** anklickt und das Formular absend, wird die Reservierung **automatisch in dein Google Kalender** eingetragen. Plus E-Mail vom Restaurant (Resend).
+Wenn jemand auf deiner Website reserviert, wird die Reservierung **automatisch in dein Google Kalender** eingetragen. Ohne Google Cloud, ohne API-Keys — nur ein kleines Skript, das unter **deinem eigenen Google-Konto** läuft.
 
-Diese Anleitung führt dich durch die Einrichtung.
-
----
-
-## 🎯 Ziel
-Jede Reservierung (Name, Datum, Uhrzeit, Gästezahl, Nachricht) landet automatisch und zeitgesteuert im **Google Kalender**.
+Dauer: **ca. 3 Minuten.**
 
 ---
 
-## Schritt 1: Google Cloud Projekt
+## Schritt 1: Apps Script öffnen
 
-1. Gehe zu <https://console.cloud.google.com>
-2. Oben links: **Projekt auswählen** → **Neues Projekt**
-3. Gib einen Namen ein, z. B. `chens-cooking` oder `reservierungen`
-4. Klicke **Erstellen**
-5. Warte 30 Sekunden, bis das Projekt aktiv ist
-6. Du wirst oben rechts benachrichtigt „Projekt erstellt"
+1. Melde dich bei dem Google-Konto an, dessen Kalender die Reservierungen bekommen soll (z. B. `wuxnite66@gmail.com`).
+2. Gehe zu **<https://script.google.com>**
+3. Klick oben links auf **„Neues Projekt"**
 
 ---
 
-## Schritt 2: Google Calendar API aktivieren
+## Schritt 2: Code einfügen
 
-1. Du bist noch in der Google Cloud Console
-2. Oben links: Menü (☰) → **APIs und Dienste** → **Bibliothek**
-3. Suchfeld: `Google Calendar` eintippen
-4. Klick auf **Google Calendar API** (sollte die erste sein)
-5. Großer blauer Button: **AKTIVIEREN** klicken
-6. Warte 10 Sekunden. Seite aktualisiert sich
-
-**Status überprüfen:**
-- Oben steht dann: „Google Calendar API ist aktiviert"
-- Wenn nicht, drücke **F5** und warte nochmal
+1. Im Editor siehst du eine leere Datei `Code.gs` mit ein paar Zeilen.
+2. **Markiere alles (Strg + A) und lösche es.**
+3. Öffne die Datei **`scripts/google-calendar-webhook.gs`** aus diesem Projekt.
+4. **Kopiere den gesamten Inhalt** und füge ihn im Apps-Script-Editor ein.
+5. Oben auf das **💾 Speichern-Symbol** klicken (oder Strg + S).
+6. Gib dem Projekt oben einen Namen, z. B. `Chens Kalender`.
 
 ---
 
-## Schritt 3: Service Account erstellen
+## Schritt 3: Als Web-App bereitstellen
 
-Ein „Service Account" ist wie ein automatischer Assistent, der Einträge in deinen Kalender schreiben darf — ohne dass du jedes Mal ein Passwort eingeben musst.
-
-1. Menü (☰) → **APIs und Dienste** → **Credentials** (Anmeldedaten)
-2. Oben: **+ CREATE CREDENTIALS** → **Service Account**
-3. **Service account name:** z. B. `chens-reservierungen`
-4. **Service account ID:** wird automatisch gefüllt (z. B. `chens-reservierungen@...iam.gserviceaccount.com`)
-5. Klick **CREATE AND CONTINUE**
-6. Nächste Seite (Grant this service account access):
-   - **Leave empty** (keine speziellen Rollen nötig)
-   - Klick **CONTINUE**
-7. Nächste Seite (Grant users access):
-   - **Skip this step** (oben rechts)
-8. Fertig — Seite zeigt die Service Account
+1. Oben rechts: **„Bereitstellen"** → **„Neue Bereitstellung"**
+2. Klick auf das **Zahnrad ⚙️** neben „Typ auswählen" → **„Web-App"**
+3. Einstellungen:
+   - **Beschreibung:** egal, z. B. `Reservierungen`
+   - **Ausführen als:** **Ich** (deine E-Mail)
+   - **Wer hat Zugriff:** **Jeder**
+4. Klick **„Bereitstellen"**
 
 ---
 
-## Schritt 4: Private Key herunterladen (JSON)
+## Schritt 4: Berechtigung bestätigen
 
-1. Du bist jetzt in der Liste **Service Accounts**
-2. Klick auf die Email, die du gerade erstellt hast (z. B. `chens-reservierungen@…iam.gserviceaccount.com`)
-3. Tab oben: **Keys** (Schlüssel)
-4. Button **Add Key** → **Create new key**
-5. Fenster öffnet: **Key type** = `JSON`
-6. Klick **CREATE**
-7. **JSON-Datei wird heruntergeladen** (z. B. `chens-reservierungen-1234567890.json`)
+Beim ersten Mal fragt Google nach Zugriff auf deinen Kalender:
 
-**Speichern:** Lade diese Datei **nicht in GitHub** — sie ist ein Geheimnis!
+1. Fenster öffnet: **„Zugriff autorisieren"** → dein Google-Konto wählen
+2. Warnung **„Google hat diese App nicht überprüft"** → das ist normal (es ist ja **deine** App)
+   - Klick **„Erweitert"** (unten links)
+   - Klick **„Zu Chens Kalender wechseln (unsicher)"**
+3. Klick **„Zulassen"**
 
 ---
 
-## Schritt 5: Werte aus der JSON auslesen
+## Schritt 5: Web-App-URL kopieren
 
-Öffne die heruntergeladene JSON-Datei mit einem Text-Editor (z. B. Notepad):
+1. Nach dem Bereitstellen zeigt Google eine **Web-App-URL**:
+   ```
+   https://script.google.com/macros/s/AKfy...sehr-lang.../exec
+   ```
+2. **Kopiere diese komplette URL** (endet auf `/exec`)
 
-```json
-{
-  "type": "service_account",
-  "project_id": "chens-cooking-123",
-  "private_key_id": "abc...",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgI...\n-----END PRIVATE KEY-----\n",
-  "client_email": "chens-reservierungen@chens-cooking-123.iam.gserviceaccount.com",
-  "client_id": "123456789...",
-  ...
-}
-```
-
-**Brauchst du:**
-- **`client_email`** (z. B. `chens-reservierungen@chens-cooking-123.iam.gserviceaccount.com`)
-- **`private_key`** (der lange Text zwischen `-----BEGIN PRIVATE KEY-----` und `-----END PRIVATE KEY-----`, mit den `\n` darin)
-
-Kopiere beide Werte. Du brauchst sie gleich.
+Diese URL brauchst du gleich für Vercel.
 
 ---
 
-## Schritt 6: Google Kalender mit Service Account teilen
+## Schritt 6: URL in Vercel eintragen
 
-1. Gehe zu <https://calendar.google.com> (dein privater Google Kalender)
-2. Oben rechts: **Einstellungen** (⚙️)
-3. Linke Spalte → **Einstellungen** klick
-4. Tab: **Freigabe und Zugriff**
-5. Abschnitt: **Bestimmten Personen Zugriff geben**
-6. **+ Personen hinzufügen**
-   - Feld: Deine **`client_email`** aus Schritt 5 einfügen (z. B. `chens-reservierungen@chens-cooking-123.iam.gserviceaccount.com`)
-   - Dropdown: **Änderungen an Ereignissen vornehmen**
-   - Klick **Teilen**
-7. Popup bestätigt: ✓
+1. Gehe zu **<https://vercel.com>** → dein Projekt **`chens-cooking`**
+2. **Settings** → **Environment Variables**
+3. Neue Variable **+ Add**:
+   - **Name:** `GOOGLE_CALENDAR_WEBHOOK`
+   - **Value:** die kopierte URL (`https://script.google.com/macros/s/…/exec`)
+   - **Environments:** alle anhaken (Production, Preview, Development)
+4. **Save**
 
 ---
 
-## Schritt 7: Kalender-ID abrufen
+## Schritt 7: Redeploy
 
-Du brauchst noch deine **Kalender-ID** (das ist meist deine Gmail-Adresse, kann aber auch anders aussehen).
+Damit Vercel die neue Variable lädt:
 
-1. Noch in Google Kalender → **Einstellungen** (⚙️)
-2. **Kalender integrieren** (auf der Seite unten)
-3. Feld **Kalender-ID**:
-   - Das ist meistens: `deine-email@gmail.com`
-   - Oder: `…@group.calendar.google.com`
-   - **Kopiere diese ID**
+1. In Vercel oben: **Deployments**
+2. Bei der obersten Deployment auf die **3 Punkte …** → **Redeploy** → **Confirm**
+3. Warte 1–2 Minuten auf den grünen Haken.
 
 ---
 
-## Schritt 8: Env-Variablen in Vercel eintragen
+## Schritt 8: Test 🎉
 
-Jetzt loggen wir dich in **Vercel** ein und speichern die Geheimnisse.
+1. Gehe auf **<https://chens-cooking.vercel.app/at>**
+2. Scroll zu **Reservierung**, fülle das Formular aus und sende ab.
+3. Öffne dein **Google Kalender** → der Termin ist da:
+   - Titel: **🥢 Reservierung: [Name] ([X] Pers.)**
+   - Datum & Uhrzeit wie eingegeben, 2 Stunden geblockt
+   - Alle Details (Telefon, E-Mail, Personen, Anmerkung) in der Beschreibung
 
-1. Gehe zu <https://vercel.com>
-2. Oben rechts: Dein Account → **Einstellungen**
-3. Oder direkt zum Projekt:
-   - **Projects** → `chens-cooking` anklicken
-   - **Settings** (Einstellungen, oben)
-4. Linke Spalte: **Environment Variables**
-5. Trage folgende 4 Variablen ein (eine nach der anderen mit **+ ADD**):
-
-| Name | Wert |
-|------|------|
-| `GOOGLE_CLIENT_EMAIL` | Deine `client_email` aus Schritt 5 |
-| `GOOGLE_PRIVATE_KEY` | Deine `private_key` aus Schritt 5 (mit den `\n`) |
-| `GOOGLE_CALENDAR_ID` | Deine Kalender-ID aus Schritt 7 |
-| `GOOGLE_CALENDAR_TZ` | `Europe/Budapest` (oder deine Zeitzone) |
-
-**Beispiel:**
-```
-Name: GOOGLE_CLIENT_EMAIL
-Value: chens-reservierungen@chens-cooking-123.iam.gserviceaccount.com
-```
-
-```
-Name: GOOGLE_PRIVATE_KEY
-Value: -----BEGIN PRIVATE KEY-----
-MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC7...
-(komplette private_key)
------END PRIVATE KEY-----
-```
-
-**Wichtig:** Private Key muss die **`\n`** darin behalten! Nicht entfernen.
+**Fertig!** Ab jetzt landet jede Reservierung automatisch im Kalender — plus die E-Mail über Resend.
 
 ---
 
-## Schritt 9: Vercel redeploy
+## ❓ Häufige Fragen
 
-1. Noch in Vercel-Einstellungen
-2. Oben: **Deployments** anklicken
-3. Siehst du die letzte Deployment (blau, mit Haken)
-4. Klick auf die 3 Punkte **…** neben der letzten Deployment
-5. **Redeploy**
-6. Fenster fragt: **Redeploy?** → **Confirm**
-7. Warte 2–3 Minuten, bis der neue Build fertig ist (grüner Haken)
+**Der Termin erscheint nicht?**
+- Steht `GOOGLE_CALENDAR_WEBHOOK` korrekt in Vercel und wurde danach neu deployed?
+- Endet die URL wirklich auf `/exec` (nicht `/dev`)?
 
-**Oder:** Einfach einen neuen Commit pushen:
-```bash
-git add -A && git commit -m "Google Calendar vars configured" && git push
-```
-Vercel deployt automatisch.
+**Wie ändere ich die Dauer (statt 2 Stunden)?**
+- Im Apps-Script `var hours = data.durationHours || 2;` — die `2` anpassen und **neu bereitstellen** (Bereitstellen → Bereitstellungen verwalten → Bearbeiten → Neue Version).
 
----
+**Anderer Kalender statt Hauptkalender?**
+- Im Script `CalendarApp.getDefaultCalendar()` ersetzen durch
+  `CalendarApp.getCalendarById("KALENDER-ID@group.calendar.google.com")`.
 
-## Schritt 10: Test!
-
-Jetzt ist die ganze Kette live:
-
-1. Gehe zu <https://chens-cooking.vercel.app/at> (deine Live-Site)
-2. Scroll zu **Reservierung**
-3. Fülle das Formular aus:
-   - Name: `Max Mustermann`
-   - Telefon: `+36 20 123 4567`
-   - E-Mail: `test@example.com`
-   - Datum: Morgen
-   - Uhrzeit: `19:30`
-   - Gäste: `4`
-   - Nachricht: `Fensterplatz bitte!`
-4. Klick **Reservieren**
-5. Seite zeigt ✓ grünes **Erfolgreich!**
-
-**Dann öffne dein Google Kalender:**
-- <https://calendar.google.com>
-- Du sieht einen neuen **Event:**
-  - Titel: `Reservierung: Max Mustermann (4 P.)`
-  - Datum & Uhrzeit: genau wie eingegeben
-  - Beschreibung: Alle Details (Telefon, E-Mail, Nachricht, etc.)
-
----
-
-## ✅ Fertig!
-
-Jetzt:
-- ✓ Jede Reservierung landet im Kalender
-- ✓ E-Mail geht auch raus (Resend)
-- ✓ Du weißt immer, wer reserviert hat
-
----
-
-## ❓ Häufige Fehler
-
-### Fehler: „Calendar insert error 404"
-→ Kalender-ID falsch oder nicht mit Service Account geteilt
-→ Lösung: **Schritt 6 & 7 nochmal überprüfen**
-
-### Fehler: „Google token error 401"
-→ Private Key falsch kopiert oder Umlaute/Leerzeichen drin
-→ Lösung: Private Key nochmal aus der JSON kopieren, langsam eingeben
-
-### Fehler: „No access_token from Google"
-→ Service Account ID falsch in Vercel gespeichert
-→ Lösung: Nochmal **Schritt 4 & 8 überprüfen**
-
-### Event erscheint nicht im Kalender
-→ Service Account nicht mit Kalender geteilt (Schritt 6)
-→ Lösung: In Google Kalender-Einstellungen prüfen: Ist die Service-Account-E-Mail dort sichtbar?
-
----
-
-## 🚀 Mehr Anpassungen (optional)
-
-In `DEPLOY.md` und `.env.example` sind auch noch 2 optionale Variablen:
-
-| Name | Wert | Standard |
-|------|------|----------|
-| `GOOGLE_CALENDAR_TZ` | deine Zeitzone | `Europe/Budapest` |
-| `RESERVATION_DURATION_MIN` | wie lange dauert die Reservierung (Minuten) | `120` |
-
-Beispiel:
-- Du möchtest, dass Events 3 Stunden lang sind → `RESERVATION_DURATION_MIN=180`
-- Du bist in einer anderen Zeitzone → `GOOGLE_CALENDAR_TZ=Europe/Vienna`
-
-Speichern in Vercel → Redeploy.
-
----
-
-## 📞 Support
-
-Wenn was nicht klappt:
-1. Schau in **Vercel → Logs** nach Fehlern
-2. Oder öffne **Browser-Konsole** (F12) und schau in der **Network**-Tab nach API-Fehlern
-
-Viel Erfolg! 🎉
+**Muss ich lokal testen?**
+- Nicht nötig. Wenn du willst: dieselbe URL in `.env.local` als `GOOGLE_CALENDAR_WEBHOOK=…` eintragen.

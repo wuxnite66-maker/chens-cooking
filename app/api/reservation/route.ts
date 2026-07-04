@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { site } from "@/content/site";
-import { calendarConfigured, createCalendarEvent } from "@/lib/calendar";
 
 /**
  * Reservation endpoint.
@@ -129,22 +128,38 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors }, { status: 422 });
   }
 
-  // Google Calendar (best-effort — never blocks the reservation).
+  // Google Calendar auto-entry via an Apps-Script webhook (runs under the
+  // owner's Google account — no API keys / Google Cloud needed).
+  // Best-effort: never blocks the reservation.
   let calendarAdded = false;
-  if (calendarConfigured()) {
+  const webhook = process.env.GOOGLE_CALENDAR_WEBHOOK;
+  if (webhook && /^\d{4}-\d{2}-\d{2}$/.test(data.date ?? "")) {
     try {
-      await createCalendarEvent({
-        name: data.name!.trim(),
-        phone: data.phone,
-        email: data.email,
-        date: data.date!,
-        time: data.time!,
-        guests: data.guests,
-        message: data.message,
+      const res = await fetch(webhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.name?.trim(),
+          phone: data.phone,
+          email: data.email,
+          date: data.date,
+          time: data.time,
+          guests: data.guests,
+          message: data.message ?? "",
+          durationHours: 2,
+        }),
       });
-      calendarAdded = true;
+      // Apps Script answers HTTP 200 even on internal errors → check the body.
+      if (res.ok) {
+        const text = await res.text();
+        try {
+          calendarAdded = JSON.parse(text)?.ok === true;
+        } catch {
+          calendarAdded = false;
+        }
+      }
     } catch (e) {
-      console.error("[reservation] calendar error:", e);
+      console.error("[reservation] calendar webhook error:", e);
     }
   }
 
