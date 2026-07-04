@@ -84,7 +84,7 @@ export function Takeaway({ site }: { site: Content }) {
         </div>
 
         {/* Menu — editorial price list with dotted leaders, masonry columns */}
-        <Reveal stagger staggerDelay={0.06} className="mt-14 gap-6 md:columns-2 md:gap-8 [&>*]:mb-6 [&>*]:break-inside-avoid">
+        <Reveal stagger staggerDelay={0.06} amount="some" className="mt-14 gap-6 md:columns-2 md:gap-8 [&>*]:mb-6 [&>*]:break-inside-avoid">
           {takeaway.categories.map((cat) => (
             <RevealItem key={cat.name}>
               <div className="rounded-2xl border border-line bg-surface p-6 sm:p-7">

@@ -9,6 +9,13 @@ type RevealProps = {
   /** Stagger children that are themselves <Reveal.Item> */
   stagger?: boolean;
   staggerDelay?: number;
+  /**
+   * Fraction of the element that must be visible before revealing.
+   * Use "some" for very tall containers (e.g. the full menu grid), which
+   * otherwise never reach the default 25% threshold on narrow screens and
+   * would stay stuck at opacity 0.
+   */
+  amount?: number | "some" | "all";
 };
 
 /**
@@ -20,6 +27,7 @@ export function Reveal({
   className,
   stagger = false,
   staggerDelay = 0.08,
+  amount,
 }: RevealProps) {
   const reduce = useReducedMotion();
   const variants: Variants = stagger
@@ -34,7 +42,7 @@ export function Reveal({
       variants={variants}
       initial="hidden"
       whileInView="show"
-      viewport={viewportOnce}
+      viewport={amount != null ? { once: true, amount } : viewportOnce}
     >
       {children}
     </motion.div>
