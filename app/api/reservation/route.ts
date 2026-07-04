@@ -168,7 +168,8 @@ export async function POST(req: Request) {
   const rawKey = process.env.RESEND_API_KEY?.trim();
   const apiKey =
     rawKey && rawKey.startsWith("re_") && !rawKey.includes("PASTE") ? rawKey : undefined;
-  const to = process.env.RESERVATION_TO || site.contact.email;
+  const to =
+    process.env.RESERVATION_TO || process.env.RESERVATION_EMAIL || site.contact.email;
   const from = process.env.RESERVATION_FROM || `${site.name} <onboarding@resend.dev>`;
   const { html, text } = buildEmail(data);
   const subject = `Neue Reservierung – ${data.name}, ${formatDate(data.date)} um ${data.time} (${data.guests} P.)`;
