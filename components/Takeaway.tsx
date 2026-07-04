@@ -25,6 +25,14 @@ function GlassIcon() {
     </svg>
   );
 }
+function SauceIcon() {
+  return (
+    <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 3h6v3l1.5 1.5a3 3 0 011 2.2V19a2 2 0 01-2 2H8.5a2 2 0 01-2-2V9.7a3 3 0 011-2.2L9 6V3z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h8" />
+    </svg>
+  );
+}
 
 export function Takeaway({ site }: { site: Content }) {
   const { takeaway, contact } = site;
@@ -61,6 +69,15 @@ export function Takeaway({ site }: { site: Content }) {
               >
                 <GlassIcon />
                 {takeaway.drinksLabel}
+              </a>
+              <a
+                href={takeaway.saucesHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-6 py-3.5 font-semibold text-gold transition-all duration-300 hover:bg-gold hover:text-onAccent"
+              >
+                <SauceIcon />
+                {takeaway.saucesLabel}
               </a>
             </div>
           </Reveal>

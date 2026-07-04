@@ -88,6 +88,8 @@ export const de = {
   stations: {
     eyebrow: "Live-Stationen",
     title: "Drei Bühnen. Ein Geschmackserlebnis.",
+    saucesHref: "/menu/chens-saucen.jpg",
+    saucesLabel: "Unsere Saucen",
     items: [
       {
         name: "Sushi Bar",
@@ -203,6 +205,8 @@ export const de = {
     pdfLabel: "Komplette Karte als PDF",
     drinksHref: "/menu/chens-getraenkekarte-2025.pdf",
     drinksLabel: "Getränkekarte (PDF)",
+    saucesHref: "/menu/chens-saucen.jpg",
+    saucesLabel: "Unsere Saucen",
     categories: [
       {
         name: "Suppen",

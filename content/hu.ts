@@ -84,6 +84,8 @@ export const hu: Content = {
   stations: {
     eyebrow: "Élő állomások",
     title: "Három színpad. Egy ízélmény.",
+    saucesHref: "/menu/chens-saucen.jpg",
+    saucesLabel: "Szószaink",
     items: [
       {
         name: "Sushi Bar",
@@ -199,6 +201,8 @@ export const hu: Content = {
     pdfLabel: "Teljes étlap PDF-ben",
     drinksHref: "/menu/chens-getraenkekarte-2025.pdf",
     drinksLabel: "Itallap (PDF)",
+    saucesHref: "/menu/chens-saucen.jpg",
+    saucesLabel: "Szószaink",
     categories: [
       {
         name: "Levesek",
