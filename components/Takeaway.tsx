@@ -1,6 +1,7 @@
 import type { Content } from "@/content/site";
-import { Reveal, RevealItem } from "./Reveal";
+import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { MenuFlipbook } from "./MenuFlipbook";
 
 function PhoneIcon() {
   return (
@@ -83,44 +84,10 @@ export function Takeaway({ site }: { site: Content }) {
           </Reveal>
         </div>
 
-        {/* Menu — editorial price list with dotted leaders, masonry columns */}
-        <Reveal stagger staggerDelay={0.06} amount="some" className="mt-14 gap-6 md:columns-2 md:gap-8 [&>*]:mb-6 [&>*]:break-inside-avoid">
-          {takeaway.categories.map((cat) => (
-            <RevealItem key={cat.name}>
-              <div className="rounded-2xl border border-line bg-surface p-6 sm:p-7">
-                <div className="mb-5 flex items-baseline justify-between gap-3 border-b border-line pb-3">
-                  <h3 className="font-serif text-xl font-semibold text-cream">{cat.name}</h3>
-                  {"note" in cat && cat.note ? (
-                    <span className="text-xs text-muted">{cat.note}</span>
-                  ) : null}
-                </div>
-
-                <ul className="space-y-3.5">
-                  {cat.items.map((item) => (
-                    <li key={item.code}>
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-mono text-[0.7rem] text-gold/70">{item.code}</span>
-                        <span className="font-medium text-cream">{item.name}</span>
-                        <span
-                          aria-hidden
-                          className="mx-1 h-px flex-1 translate-y-[-2px] border-b border-dotted border-line"
-                        />
-                        <span className="tabular shrink-0 font-serif text-cream">
-                          {item.price} Ft
-                        </span>
-                      </div>
-                      {item.desc ? (
-                        <p className="ml-[2.1rem] mt-0.5 text-sm leading-snug text-muted">
-                          {item.desc}
-                        </p>
-                      ) : null}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </RevealItem>
-          ))}
-        </Reveal>
+        {/* Menu — flip through the real menu pages (food spreads + drinks) */}
+        <div className="mt-14">
+          <MenuFlipbook site={site} />
+        </div>
 
         <Reveal className="mt-8 flex flex-col gap-1 rounded-2xl border border-line bg-ink p-5 text-sm text-muted sm:p-6">
           <p>{takeaway.pickupNote}</p>

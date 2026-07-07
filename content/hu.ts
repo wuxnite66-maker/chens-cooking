@@ -368,6 +368,10 @@ export const hu: Content = {
     footerBlurb:
       "All-you-can-eat sushi-bárral, teppanyaki-grillel és wok-állomással — frissen, az Ön szeme előtt készítve Sopronban.",
     langLabel: "Nyelv",
+    flipPrev: "Vissza",
+    flipNext: "Tovább",
+    flipPage: "Oldal",
+    flipHint: "Lapozáshoz húzd vagy kattints a lap szélére",
     form: {
       name: "Név",
       phone: "Telefon",

@@ -373,6 +373,10 @@ export const de = {
     footerBlurb:
       "All-you-can-eat mit Sushi-Bar, Teppanyaki-Grill und Wok-Station — frisch vor Ihren Augen zubereitet in Sopron.",
     langLabel: "Sprache",
+    flipPrev: "Zurück",
+    flipNext: "Weiter",
+    flipPage: "Seite",
+    flipHint: "Zum Blättern wischen oder auf den Seitenrand klicken",
     form: {
       name: "Name",
       phone: "Telefon",

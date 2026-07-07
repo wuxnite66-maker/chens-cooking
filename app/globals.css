@@ -134,3 +134,27 @@ body::before {
   background: var(--gold);
   color: #0b0a09;
 }
+
+/* Menu flipbook — page-turn animations */
+@keyframes menuFlipNext {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(-179deg);
+  }
+}
+@keyframes menuFlipPrev {
+  from {
+    transform: rotateY(-179deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}
+.menu-flip-next {
+  animation: menuFlipNext 720ms cubic-bezier(0.42, 0.1, 0.24, 1) forwards;
+}
+.menu-flip-prev {
+  animation: menuFlipPrev 720ms cubic-bezier(0.42, 0.1, 0.24, 1) forwards;
+}
