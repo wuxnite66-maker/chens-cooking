@@ -376,7 +376,9 @@ export const de = {
     flipPrev: "Zurück",
     flipNext: "Weiter",
     flipPage: "Seite",
-    flipHint: "Zum Blättern wischen oder auf den Seitenrand klicken",
+    flipHint: "Blättern: am Rand tippen · in die Mitte tippen = Vollbild",
+    flipZoom: "Vollbild",
+    flipClose: "Schließen",
     form: {
       name: "Name",
       phone: "Telefon",

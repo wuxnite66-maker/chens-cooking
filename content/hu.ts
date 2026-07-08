@@ -371,7 +371,9 @@ export const hu: Content = {
     flipPrev: "Vissza",
     flipNext: "Tovább",
     flipPage: "Oldal",
-    flipHint: "Lapozáshoz húzd vagy kattints a lap szélére",
+    flipHint: "Lapozás: koppints a szélére · középre koppintva = teljes képernyő",
+    flipZoom: "Teljes képernyő",
+    flipClose: "Bezárás",
     form: {
       name: "Név",
       phone: "Telefon",
