@@ -7,7 +7,7 @@ import type { Content } from "@/content/site";
 const Inner = dynamic(() => import("./MenuFlipbookInner"), {
   ssr: false,
   loading: () => (
-    <div className="mx-auto w-full max-w-[980px]">
+    <div className="mx-auto w-full max-w-[1180px]">
       <div className="aspect-[1.4/1] w-full animate-pulse rounded-xl border border-line bg-surface" />
     </div>
   ),

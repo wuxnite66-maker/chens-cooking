@@ -52,7 +52,7 @@ export default function MenuFlipbookInner({ site }: { site: Content }) {
   const display = anim ? anim.to : index;
 
   return (
-    <div className="mx-auto w-full max-w-[980px]">
+    <div className="mx-auto w-full max-w-[1180px]">
       <div className="w-full" style={{ perspective: "2400px" }}>
         <div
           className="relative w-full select-none overflow-hidden rounded-lg border border-line bg-ink shadow-2xl shadow-black/40"
