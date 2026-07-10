@@ -49,11 +49,11 @@ const MESSAGES = {
   },
 } as const;
 
-function formatDate(iso?: string) {
+function formatDate(iso?: string, locale = "de-AT") {
   if (!iso) return "—";
   const d = new Date(`${iso}T00:00:00`);
   if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("de-AT", {
+  return d.toLocaleDateString(locale, {
     weekday: "long",
     day: "2-digit",
     month: "long",
@@ -94,6 +94,61 @@ function buildEmail(data: Payload) {
 
   const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
   return { html, text };
+}
+
+// Customer-facing confirmation (bilingual). Requires a verified Resend domain
+// to actually deliver to arbitrary guest addresses.
+const CUSTOMER = {
+  at: {
+    subject: `Ihre Reservierungsanfrage – ${site.name}`,
+    eyebrow: "Reservierung erhalten",
+    greeting: (n: string) => `Hallo ${n},`,
+    intro: "vielen Dank für Ihre Reservierungsanfrage. Wir haben folgende Angaben erhalten:",
+    labels: { date: "Datum", time: "Uhrzeit", guests: "Personen" },
+    note: "Diese E-Mail ist die Eingangsbestätigung Ihrer Anfrage. Wir bestätigen Ihre Reservierung in Kürze telefonisch oder per E-Mail.",
+    questions: "Fragen? Rufen Sie uns gerne an:",
+    signoff: "Wir freuen uns auf Ihren Besuch!",
+  },
+  hu: {
+    subject: `Asztalfoglalási kérése – ${site.name}`,
+    eyebrow: "Foglalás beérkezett",
+    greeting: (n: string) => `Kedves ${n},`,
+    intro: "köszönjük asztalfoglalási kérését. A következő adatokat kaptuk:",
+    labels: { date: "Dátum", time: "Időpont", guests: "Fő" },
+    note: "Ez az e-mail a kérése beérkezésének visszaigazolása. Foglalását hamarosan telefonon vagy e-mailben véglegesítjük.",
+    questions: "Kérdése van? Hívjon minket:",
+    signoff: "Várjuk szeretettel!",
+  },
+} as const;
+
+function buildCustomerEmail(data: Payload, isHu: boolean) {
+  const c = isHu ? CUSTOMER.hu : CUSTOMER.at;
+  const rows: [string, string][] = [
+    [c.labels.date, formatDate(data.date, isHu ? "hu-HU" : "de-AT")],
+    [c.labels.time, data.time ?? "—"],
+    [c.labels.guests, data.guests ?? "—"],
+  ];
+  const addr = `${site.contact.address.street}, ${site.contact.address.zip} ${site.contact.address.city}`;
+  const html = `
+  <div style="font-family:Georgia,serif;background:#0b0a09;color:#f6f1e9;padding:32px;border-radius:12px;max-width:560px;margin:auto">
+    <p style="letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:#c9a24b;margin:0 0 8px">${c.eyebrow}</p>
+    <h1 style="font-size:24px;margin:0 0 16px;color:#f6f1e9">${site.name}</h1>
+    <p style="font-family:Arial,sans-serif;font-size:14px;margin:0 0 4px">${escapeHtml(c.greeting(data.name ?? ""))}</p>
+    <p style="font-family:Arial,sans-serif;font-size:14px;color:#d8cfbd;margin:0 0 16px">${c.intro}</p>
+    <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">
+      ${rows
+        .map(
+          ([k, v]) =>
+            `<tr><td style="padding:9px 0;color:#a59b8d;border-bottom:1px solid rgba(201,162,75,.18);width:120px">${k}</td><td style="padding:9px 0;color:#f6f1e9;border-bottom:1px solid rgba(201,162,75,.18)">${escapeHtml(v)}</td></tr>`,
+        )
+        .join("")}
+    </table>
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:#d8cfbd;margin:18px 0 0">${c.note}</p>
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:#a59b8d;margin:16px 0 0">${c.questions} <a href="${site.contact.phoneHref}" style="color:#c9a24b;text-decoration:none">${site.contact.phone}</a><br>${addr}</p>
+    <p style="font-family:Arial,sans-serif;font-size:14px;color:#f6f1e9;margin:18px 0 0">${c.signoff}</p>
+  </div>`;
+  const text = `${c.greeting(data.name ?? "")}\n${c.intro}\n\n${rows.map(([k, v]) => `${k}: ${v}`).join("\n")}\n\n${c.note}\n\n${c.questions} ${site.contact.phone}\n${addr}\n\n${c.signoff}`;
+  return { subject: c.subject, html, text };
 }
 
 function escapeHtml(s: string) {
@@ -204,6 +259,23 @@ export async function POST(req: Request) {
         { ok: false, error: "Versand fehlgeschlagen." },
         { status: 502 },
       );
+    }
+
+    // Guest confirmation e-mail (best-effort). Needs a verified sender domain
+    // in Resend to actually reach arbitrary guest inboxes.
+    if (data.email && EMAIL_RE.test(data.email)) {
+      const cust = buildCustomerEmail(data, data.locale === "hu");
+      try {
+        await resend.emails.send({
+          from,
+          to: data.email,
+          subject: cust.subject,
+          html: cust.html,
+          text: cust.text,
+        });
+      } catch (e) {
+        console.error("[reservation] guest confirmation failed:", e);
+      }
     }
 
     return NextResponse.json({ ok: true, delivered: true, calendar: calendarAdded });

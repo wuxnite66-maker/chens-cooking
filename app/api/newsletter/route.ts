@@ -18,6 +18,41 @@ function escapeHtml(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
+// Welcome e-mail to the subscriber (bilingual). Needs a verified Resend domain
+// to actually reach arbitrary inboxes.
+const WELCOME = {
+  at: {
+    subject: `Willkommen bei ${site.name}`,
+    eyebrow: "Newsletter",
+    heading: "Willkommen!",
+    body: "Danke fürs Anmelden. Ab jetzt erfährst du als Erste:r von Happy Night, neuen Gerichten und Aktionen.",
+    tip: "Übrigens: Happy Night ist jeden Mittwoch ab 17 Uhr — alkoholfreie Getränke all-inclusive.",
+    signoff: "Bis bald bei Chen's Cooking!",
+  },
+  hu: {
+    subject: `Üdvözlünk a ${site.name}-nál`,
+    eyebrow: "Hírlevél",
+    heading: "Üdvözlünk!",
+    body: "Köszönjük a feliratkozást. Mostantól elsőként értesülsz a Happy Nightról, új fogásokról és akciókról.",
+    tip: "Egyébként: a Happy Night minden szerdán 17 órától — alkoholmentes italok all inclusive.",
+    signoff: "Hamarosan találkozunk a Chen's Cookingnál!",
+  },
+} as const;
+
+function buildWelcome(isHu: boolean) {
+  const c = isHu ? WELCOME.hu : WELCOME.at;
+  const html = `
+  <div style="font-family:Georgia,serif;background:#0b0a09;color:#f6f1e9;padding:32px;border-radius:12px;max-width:520px;margin:auto">
+    <p style="letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:#c9a24b;margin:0 0 8px">${c.eyebrow}</p>
+    <h1 style="font-size:24px;margin:0 0 14px;color:#f6f1e9">${c.heading}</h1>
+    <p style="font-family:Arial,sans-serif;font-size:14px;color:#d8cfbd;margin:0 0 14px">${c.body}</p>
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:#c9a24b;margin:0 0 16px">${c.tip}</p>
+    <p style="font-family:Arial,sans-serif;font-size:14px;color:#f6f1e9;margin:0">${c.signoff}</p>
+  </div>`;
+  const text = `${c.heading}\n\n${c.body}\n\n${c.tip}\n\n${c.signoff}`;
+  return { subject: c.subject, html, text };
+}
+
 export async function POST(req: Request) {
   let data: Payload;
   try {
@@ -70,6 +105,15 @@ export async function POST(req: Request) {
       console.error("[newsletter] Resend error:", error);
       return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
     }
+
+    // Welcome e-mail to the subscriber (best-effort; needs a verified domain).
+    const w = buildWelcome(data.locale === "hu");
+    try {
+      await resend.emails.send({ from, to: email, subject: w.subject, html: w.html, text: w.text });
+    } catch (e) {
+      console.error("[newsletter] welcome mail failed:", e);
+    }
+
     return NextResponse.json({ ok: true, delivered: true });
   } catch (err) {
     console.error("[newsletter] send failed:", err);
