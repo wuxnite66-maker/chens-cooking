@@ -18,15 +18,6 @@ function PinIcon() {
     </svg>
   );
 }
-function InstaIcon() {
-  return (
-    <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 text-gold" fill="none" stroke="currentColor" strokeWidth="1.6">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
 function WhatsAppIcon() {
   return (
     <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 text-gold" fill="currentColor">
@@ -94,19 +85,6 @@ export function Reservation({ site }: { site: Content }) {
               </div>
 
               <OpeningHours site={site} />
-
-              <a
-                href={social.instagram.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-4 transition-colors hover:text-gold"
-              >
-                <InstaIcon />
-                <span>
-                  <span className="block text-xs uppercase tracking-wider text-muted">Instagram</span>
-                  <span className="font-serif text-lg text-cream">{social.instagram.handle}</span>
-                </span>
-              </a>
 
               <a
                 href={social.whatsapp.url}

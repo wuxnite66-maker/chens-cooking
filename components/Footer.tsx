@@ -1,16 +1,6 @@
 import type { Content } from "@/content/site";
 import { Logo } from "./Logo";
 
-function InstagramIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg aria-hidden viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.6">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 function WhatsAppIcon({ className = "" }: { className?: string }) {
   return (
     <svg aria-hidden viewBox="0 0 24 24" className={className} fill="currentColor">
@@ -53,16 +43,6 @@ export function Footer({ site }: { site: Content }) {
               {hours.label} · {hours.range}
             </p>
             <div className="mt-4 flex flex-col gap-2.5">
-              <a
-                href={social.instagram.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-muted transition-colors hover:text-gold"
-                aria-label={`Chen's Cooking auf Instagram (${social.instagram.handle})`}
-              >
-                <InstagramIcon className="h-5 w-5" />
-                <span className="text-sm">{social.instagram.handle}</span>
-              </a>
               <a
                 href={social.whatsapp.url}
                 target="_blank"

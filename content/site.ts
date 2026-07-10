@@ -28,10 +28,6 @@ export const de = {
   },
 
   social: {
-    instagram: {
-      handle: "@chens_cooking_2700",
-      url: "https://www.instagram.com/chens_cooking_2700/",
-    },
     whatsapp: {
       label: "WhatsApp-Kanal",
       url: "https://whatsapp.com/channel/0029VbDL7s911ulRvtRpHR0t",
