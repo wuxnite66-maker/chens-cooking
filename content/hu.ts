@@ -30,7 +30,7 @@ export const hu: Content = {
     },
     whatsapp: {
       label: "WhatsApp-csatorna",
-      url: "https://whatsapp.com/channel/REPLACE-WITH-YOUR-CHANNEL",
+      url: "https://whatsapp.com/channel/0029VbDL7s911ulRvtRpHR0t",
     },
   },
 

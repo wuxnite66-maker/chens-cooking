@@ -34,8 +34,7 @@ export const de = {
     },
     whatsapp: {
       label: "WhatsApp-Kanal",
-      // TODO: durch deinen echten Kanal-Link ersetzen (https://whatsapp.com/channel/…)
-      url: "https://whatsapp.com/channel/REPLACE-WITH-YOUR-CHANNEL",
+      url: "https://whatsapp.com/channel/0029VbDL7s911ulRvtRpHR0t",
     },
   },
 
