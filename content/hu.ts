@@ -351,6 +351,24 @@ export const hu: Content = {
     { label: "Kapcsolat", href: "#kontakt" },
   ],
 
+  newsletter: {
+    image: "/images/newsletter-hu.jpg",
+    imageAlt: "Chen's Cooking — Happy Night",
+    h1: "HAPPY NIGHT & HÍREK",
+    h2: "ELSŐKÉNT ÉRTESÜLJ",
+    sub: "Akciók, új fogások és minden Happy Night — egyenesen a postafiókodba.",
+    email: "E-mail-cím",
+    birthday: "Születésnap (nem kötelező)",
+    submit: "Feliratkozás",
+    submitting: "Küldés …",
+    success: "Köszönjük! Feliratkoztál.",
+    successSub: "Hamarosan jelentkezünk a hírekkel.",
+    error: "Hiba történt. Kérjük, próbáld újra.",
+    invalidEmail: "Kérjük, adj meg egy érvényes e-mail-címet.",
+    noThanks: "Nem, köszönöm",
+    close: "Bezárás",
+  },
+
   ui: {
     mainNav: "Főnavigáció",
     menu: "Menü",

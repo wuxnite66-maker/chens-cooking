@@ -356,6 +356,24 @@ export const de = {
   ],
 
   // UI micro-copy (buttons, labels, aria) used across components
+  newsletter: {
+    image: "/images/newsletter-de.jpg",
+    imageAlt: "Chen's Cooking — Happy Night",
+    h1: "HAPPY NIGHT & NEWS",
+    h2: "ALS ERSTES ERFAHREN",
+    sub: "Aktionen, neue Gerichte & jede Happy Night — direkt in dein Postfach.",
+    email: "E-Mail-Adresse",
+    birthday: "Geburtstag (optional)",
+    submit: "Anmelden",
+    submitting: "Wird gesendet …",
+    success: "Danke! Du bist dabei.",
+    successSub: "Wir melden uns mit den nächsten News.",
+    error: "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+    invalidEmail: "Bitte eine gültige E-Mail-Adresse eingeben.",
+    noThanks: "Nein danke",
+    close: "Schließen",
+  },
+
   ui: {
     mainNav: "Hauptnavigation",
     menu: "Menü",

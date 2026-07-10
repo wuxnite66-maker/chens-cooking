@@ -13,6 +13,7 @@ import { Reservation } from "@/components/Reservation";
 import { Footer } from "@/components/Footer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { HtmlLang } from "@/components/HtmlLang";
+import { NewsletterPopup } from "@/components/NewsletterPopup";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -57,6 +58,7 @@ export default function LocalePage({ params }: { params: { locale: string } }) {
       </main>
       <Footer site={site} />
       <StickyMobileCTA site={site} />
+      <NewsletterPopup site={site} />
     </>
   );
 }
