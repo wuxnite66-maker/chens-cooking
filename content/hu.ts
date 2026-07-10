@@ -28,6 +28,10 @@ export const hu: Content = {
       handle: "@chens_cooking_2700",
       url: "https://www.instagram.com/chens_cooking_2700/",
     },
+    whatsapp: {
+      label: "WhatsApp-csatorna",
+      url: "https://whatsapp.com/channel/REPLACE-WITH-YOUR-CHANNEL",
+    },
   },
 
   promo: {

@@ -32,6 +32,11 @@ export const de = {
       handle: "@chens_cooking_2700",
       url: "https://www.instagram.com/chens_cooking_2700/",
     },
+    whatsapp: {
+      label: "WhatsApp-Kanal",
+      // TODO: durch deinen echten Kanal-Link ersetzen (https://whatsapp.com/channel/…)
+      url: "https://whatsapp.com/channel/REPLACE-WITH-YOUR-CHANNEL",
+    },
   },
 
   promo: {
