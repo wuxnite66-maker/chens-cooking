@@ -73,6 +73,7 @@ export function Hero({ site }: { site: Content }) {
       />
 
       <div className="mx-auto w-full max-w-content px-5 pb-20 pt-32 sm:px-8 sm:pb-28">
+        <div className="flex items-stretch justify-between gap-10 xl:gap-16">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-3xl">
           {/* Promo badge */}
           <motion.p
@@ -133,39 +134,39 @@ export function Hero({ site }: { site: Content }) {
             <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
           </motion.a>
         </motion.div>
-      </div>
 
-      {/* Happy Night poster — straight, interactive, fills the empty space (large screens) */}
-      <div className="absolute right-[6%] top-1/2 hidden w-[clamp(300px,23vw,390px)] -translate-y-1/2 xl:block">
-        <motion.div
-          initial={{ opacity: 0, y: reduce ? 0 : 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 1, ease: EASE_OUT }}
-        >
-          <a
-            href={promo.href}
-            aria-label={`${promo.label} – ${promo.headline}`}
-            className="group relative block aspect-[1080/1350] w-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl shadow-black/70 ring-1 ring-black/50 transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/80 hover:shadow-[0_30px_70px_-18px_rgba(201,162,75,0.5)]"
+          {/* Happy Night poster — matches the text height, straight & interactive (xl+) */}
+          <motion.div
+            initial={{ opacity: 0, y: reduce ? 0 : 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 1, ease: EASE_OUT }}
+            className="hidden shrink-0 self-stretch xl:block"
           >
-            <Image
-              src={site.newsletter.image}
-              alt=""
-              fill
-              sizes="390px"
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-            />
-            {/* gold inner glow on hover */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/0 transition-all duration-500 group-hover:ring-gold/40"
-            />
-            {/* shine sweep on hover */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -translate-x-[250%] -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-[800ms] ease-out group-hover:translate-x-[400%]"
-            />
-          </a>
-        </motion.div>
+            <a
+              href={promo.href}
+              aria-label={`${promo.label} – ${promo.headline}`}
+              className="group relative block aspect-[1080/1350] h-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl shadow-black/70 ring-1 ring-black/50 transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/80 hover:shadow-[0_30px_70px_-18px_rgba(201,162,75,0.5)]"
+            >
+              <Image
+                src={site.newsletter.image}
+                alt=""
+                fill
+                sizes="380px"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+              />
+              {/* gold inner glow on hover */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/0 transition-all duration-500 group-hover:ring-gold/40"
+              />
+              {/* shine sweep on hover */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -translate-x-[250%] -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-[800ms] ease-out group-hover:translate-x-[400%]"
+              />
+            </a>
+          </motion.div>
+        </div>
       </div>
 
       {/* Scroll cue */}
