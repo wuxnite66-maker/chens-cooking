@@ -371,6 +371,8 @@ export const hu: Content = {
     invalidEmail: "Kérjük, adj meg egy érvényes e-mail-címet.",
     noThanks: "Nem, köszönöm",
     close: "Bezárás",
+    whatsappCta: "Kövess minket WhatsApp-on",
+    whatsappOr: "vagy",
   },
 
   ui: {

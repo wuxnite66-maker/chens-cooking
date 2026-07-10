@@ -376,6 +376,8 @@ export const de = {
     invalidEmail: "Bitte eine gültige E-Mail-Adresse eingeben.",
     noThanks: "Nein danke",
     close: "Schließen",
+    whatsappCta: "Auf WhatsApp folgen",
+    whatsappOr: "oder",
   },
 
   ui: {
