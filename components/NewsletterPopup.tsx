@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { Content } from "@/content/site";
 
-const STORAGE_KEY = "chens_newsletter_seen";
 type Status = "idle" | "submitting" | "success" | "error";
 
 function WhatsAppIcon({ className = "" }: { className?: string }) {
@@ -22,26 +21,13 @@ export function NewsletterPopup({ site }: { site: Content }) {
   const [errorMsg, setErrorMsg] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Show once, a few seconds after first visit.
+  // Show a few seconds after every visit (not just once).
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    try {
-      if (localStorage.getItem(STORAGE_KEY)) return;
-    } catch {
-      /* ignore */
-    }
     const t = setTimeout(() => setOpen(true), 2500);
     return () => clearTimeout(t);
   }, []);
 
-  const dismiss = () => {
-    setOpen(false);
-    try {
-      localStorage.setItem(STORAGE_KEY, "1");
-    } catch {
-      /* ignore */
-    }
-  };
+  const dismiss = () => setOpen(false);
 
   // Lock scroll + close on Escape while open.
   useEffect(() => {
@@ -78,11 +64,6 @@ export function NewsletterPopup({ site }: { site: Content }) {
       });
       if (res.ok) {
         setStatus("success");
-        try {
-          localStorage.setItem(STORAGE_KEY, "1");
-        } catch {
-          /* ignore */
-        }
         setTimeout(() => setOpen(false), 2600);
         return;
       }

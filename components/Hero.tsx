@@ -73,7 +73,7 @@ export function Hero({ site }: { site: Content }) {
       />
 
       <div className="mx-auto w-full max-w-content px-5 pb-20 pt-32 sm:px-8 sm:pb-28">
-        <div className="flex items-stretch justify-between gap-10 xl:gap-16">
+        <div className="flex items-center justify-between gap-8">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-3xl">
           {/* Promo badge */}
           <motion.p
@@ -140,12 +140,12 @@ export function Hero({ site }: { site: Content }) {
             initial={{ opacity: 0, y: reduce ? 0 : 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.55, duration: 1, ease: EASE_OUT }}
-            className="hidden shrink-0 self-stretch xl:block"
+            className="hidden shrink-0 self-center xl:mr-10 xl:block xl:w-[330px]"
           >
             <a
               href={promo.href}
               aria-label={`${promo.label} – ${promo.headline}`}
-              className="group relative block aspect-[1080/1350] h-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl shadow-black/70 ring-1 ring-black/50 transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/80 hover:shadow-[0_30px_70px_-18px_rgba(201,162,75,0.5)]"
+              className="group relative block aspect-[1080/1350] w-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl shadow-black/70 ring-1 ring-black/50 transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/80 hover:shadow-[0_30px_70px_-18px_rgba(201,162,75,0.5)]"
             >
               <Image
                 src={site.newsletter.image}
