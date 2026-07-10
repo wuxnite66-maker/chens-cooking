@@ -267,11 +267,11 @@ export const de = {
         name: "Ramen & Udon",
         note: "sättigender Suppentopf, als Hauptspeise",
         items: [
-          { code: "H17", name: "Gemüse-Ramen", price: "2290", desc: "scharf, chin. Eiernudeln" },
-          { code: "H18", name: "Gemüse-Udon", price: "2290", desc: "Weizennudeln" },
-          { code: "H18A", name: "Enten-Ramen", price: "2790", desc: "" },
-          { code: "H19", name: "Meeresfrüchte-Ramen", price: "2790", desc: "scharf, chin. Eiernudeln" },
-          { code: "H20", name: "Meeresfrüchte-Udon", price: "2790", desc: "mit Soja gewürzte Nudeln" },
+          { code: "H17", name: "Gemüse-Ramen", price: "3290", desc: "scharf, chin. Eiernudeln" },
+          { code: "H18", name: "Gemüse-Udon", price: "3290", desc: "Weizennudeln" },
+          { code: "H18A", name: "Enten-Ramen", price: "3790", desc: "" },
+          { code: "H19", name: "Meeresfrüchte-Ramen", price: "3790", desc: "scharf, chin. Eiernudeln" },
+          { code: "H20", name: "Meeresfrüchte-Udon", price: "3790", desc: "mit Soja gewürzte Nudeln" },
         ],
       },
       {

@@ -263,11 +263,11 @@ export const hu: Content = {
         name: "Ramen & Udon",
         note: "tartalmas leves egytálétel, főételként fogyasztható",
         items: [
-          { code: "H17", name: "Ramen zöldséggel", price: "2290", desc: "csípős, kínai tojásos tészta" },
-          { code: "H18", name: "Udon zöldséggel", price: "2290", desc: "búzalisztből készült tészta" },
-          { code: "H18A", name: "Kacsa ramen", price: "2790", desc: "" },
-          { code: "H19", name: "Ramen tenger gyümölcseivel", price: "2790", desc: "csípős, kínai tojásos tészta" },
-          { code: "H20", name: "Udon tenger gyümölcseivel", price: "2790", desc: "szójával ízesített tészta" },
+          { code: "H17", name: "Ramen zöldséggel", price: "3290", desc: "csípős, kínai tojásos tészta" },
+          { code: "H18", name: "Udon zöldséggel", price: "3290", desc: "búzalisztből készült tészta" },
+          { code: "H18A", name: "Kacsa ramen", price: "3790", desc: "" },
+          { code: "H19", name: "Ramen tenger gyümölcseivel", price: "3790", desc: "csípős, kínai tojásos tészta" },
+          { code: "H20", name: "Udon tenger gyümölcseivel", price: "3790", desc: "szójával ízesített tészta" },
         ],
       },
       {
