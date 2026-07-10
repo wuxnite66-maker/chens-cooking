@@ -316,7 +316,7 @@ export const de = {
           { code: "S16", name: "Sake-Mix", price: "2390", desc: "18 Stück: mit Lachs" },
           { code: "S17", name: "Futomaki", price: "2890", desc: "10 Stück, dicke Rolle mit Surimi und Gemüse" },
           { code: "S18", name: "California-Maki", price: "2890", desc: "10 Stück, dicke Rolle mit Garnele, Surimi, Avocado" },
-          { code: "S19", name: "Sushi Box", price: "7790", desc: "" },
+          { code: "S19", name: "Sushi Box", price: "7790", desc: "Sushi (12 Stück), California-Maki (10 Stück), Maki klein (8 Stück)" },
         ],
       },
       {

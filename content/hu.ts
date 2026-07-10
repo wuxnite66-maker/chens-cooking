@@ -312,7 +312,7 @@ export const hu: Content = {
           { code: "S16", name: "Sake-Mix", price: "2390", desc: "18 db: lazaccal" },
           { code: "S17", name: "Futomaki", price: "2890", desc: "10 db, vastag tekercs surimivel és zöldséggel" },
           { code: "S18", name: "California-Maki", price: "2890", desc: "10 db, vastag tekercs garnélával, surimivel, avokádóval" },
-          { code: "S19", name: "Sushi Box", price: "7790", desc: "" },
+          { code: "S19", name: "Sushi Box", price: "7790", desc: "Sushi (12 db), California-Maki (10 db), kis maki (8 db)" },
         ],
       },
       {
