@@ -135,23 +135,38 @@ export function Hero({ site }: { site: Content }) {
         </motion.div>
       </div>
 
-      {/* Happy Night poster — fills the empty space on large screens */}
-      <motion.div
-        initial={{ opacity: 0, y: reduce ? 0 : 30, rotate: reduce ? 0 : -1.5 }}
-        animate={{ opacity: 1, y: 0, rotate: -1.5 }}
-        transition={{ delay: 0.55, duration: 1, ease: EASE_OUT }}
-        className="absolute right-[6%] top-1/2 hidden w-[clamp(300px,23vw,390px)] -translate-y-1/2 xl:block"
-      >
-        <div className="relative aspect-[1080/1350] w-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl shadow-black/70 ring-1 ring-black/50">
-          <Image
-            src={site.newsletter.image}
-            alt=""
-            fill
-            sizes="390px"
-            className="object-cover"
-          />
-        </div>
-      </motion.div>
+      {/* Happy Night poster — straight, interactive, fills the empty space (large screens) */}
+      <div className="absolute right-[6%] top-1/2 hidden w-[clamp(300px,23vw,390px)] -translate-y-1/2 xl:block">
+        <motion.div
+          initial={{ opacity: 0, y: reduce ? 0 : 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.55, duration: 1, ease: EASE_OUT }}
+        >
+          <a
+            href={promo.href}
+            aria-label={`${promo.label} – ${promo.headline}`}
+            className="group relative block aspect-[1080/1350] w-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl shadow-black/70 ring-1 ring-black/50 transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/80 hover:shadow-[0_30px_70px_-18px_rgba(201,162,75,0.5)]"
+          >
+            <Image
+              src={site.newsletter.image}
+              alt=""
+              fill
+              sizes="390px"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+            />
+            {/* gold inner glow on hover */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/0 transition-all duration-500 group-hover:ring-gold/40"
+            />
+            {/* shine sweep on hover */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -translate-x-[250%] -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-[800ms] ease-out group-hover:translate-x-[400%]"
+            />
+          </a>
+        </motion.div>
+      </div>
 
       {/* Scroll cue */}
       {!reduce && (
