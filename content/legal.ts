@@ -10,6 +10,10 @@ import type { Content } from "./site";
 export const PLACEHOLDER_DE = "⟨ bitte ergänzen ⟩";
 export const PLACEHOLDER_HU = "⟨ kérjük kitölteni ⟩";
 
+/** Owner-provided legal data. */
+export const LEGAL_COMPANY = "Chens Cooking";
+export const LEGAL_EMAIL = "jinmarco17@gmail.com";
+
 export type LegalRow = { label: string; value: string; isPlaceholder?: boolean };
 export type LegalSection = { heading: string; body?: string; items?: string[] };
 export type LegalDoc = {
@@ -30,7 +34,6 @@ export type LegalContent = {
 export function getLegal(locale: string, site: Content): LegalContent {
   const addr = `${site.contact.address.street}, ${site.contact.address.zip} ${site.contact.address.city}, ${site.contact.address.country}`;
   const isHu = locale === "hu";
-  const P = isHu ? PLACEHOLDER_HU : PLACEHOLDER_DE;
 
   if (isHu) {
     return {
@@ -39,19 +42,15 @@ export function getLegal(locale: string, site: Content): LegalContent {
       impressum: {
         title: "Impresszum",
         updated: "Utolsó frissítés: 2026. július",
-        intro:
-          "A gazdaságról szóló tájékoztatás. Az itt ⟨…⟩ jelölt adatokat az üzemeltetőnek kell kitöltenie.",
+        intro: "A vállalkozásra vonatkozó, jogszabály szerinti adatok.",
         rows: [
-          { label: "Cégnév / egyéni vállalkozó neve", value: P, isPlaceholder: true },
+          { label: "Cégnév / egyéni vállalkozó neve", value: LEGAL_COMPANY },
           { label: "Székhely / cím", value: addr },
-          { label: "E-mail", value: site.contact.email },
+          { label: "E-mail", value: LEGAL_EMAIL },
           { label: "Telefon", value: site.contact.phone },
-          { label: "Adószám", value: P, isPlaceholder: true },
-          { label: "Cégjegyzékszám / nyilvántartási szám", value: P, isPlaceholder: true },
-          { label: "Képviseletre jogosult személy", value: P, isPlaceholder: true },
         ],
         disclaimer:
-          "Ez a minta a jogszabály által előírt kötelező adatok szerkezetét tartalmazza, de nem minősül jogi tanácsadásnak. A közzététel előtt kérjük, ellenőrizze az adatokat.",
+          "Ezek az adatok legjobb tudásunk szerint kerültek megadásra, és nem minősülnek jogi tanácsadásnak. Közzététel előtt javasolt szakemberrel ellenőriztetni.",
       },
       datenschutz: {
         title: "Adatvédelmi tájékoztató (GDPR)",
@@ -61,7 +60,7 @@ export function getLegal(locale: string, site: Content): LegalContent {
         sections: [
           {
             heading: "1. Az adatkezelő",
-            body: `Az adatkezelésért felelős: ${site.name}, ${addr}. E-mail: ${site.contact.email}, telefon: ${site.contact.phone}. A konkrét cégadatok az impresszumban találhatók.`,
+            body: `Az adatkezelésért felelős: ${site.name}, ${addr}. E-mail: ${LEGAL_EMAIL}, telefon: ${site.contact.phone}. A konkrét cégadatok az impresszumban találhatók.`,
           },
           {
             heading: "2. Milyen adatokat gyűjtünk",
@@ -104,7 +103,7 @@ export function getLegal(locale: string, site: Content): LegalContent {
           },
           {
             heading: "7. Kapcsolat adatvédelmi kérdésekben",
-            body: `Adatvédelmi kérdésekkel forduljon hozzánk: ${site.contact.email}.`,
+            body: `Adatvédelmi kérdésekkel forduljon hozzánk: ${LEGAL_EMAIL}.`,
           },
           {
             heading: "8. Sütik (cookie-k)",
@@ -124,19 +123,15 @@ export function getLegal(locale: string, site: Content): LegalContent {
     impressum: {
       title: "Impressum",
       updated: "Stand: Juli 2026",
-      intro:
-        "Angaben zum Unternehmen. Die mit ⟨…⟩ markierten Felder müssen vom Betreiber ergänzt werden.",
+      intro: "Angaben zum Unternehmen gemäß den gesetzlichen Vorgaben.",
       rows: [
-        { label: "Firmenname / Einzelunternehmer", value: P, isPlaceholder: true },
+        { label: "Firmenname / Einzelunternehmer", value: LEGAL_COMPANY },
         { label: "Anschrift", value: addr },
-        { label: "E-Mail-Adresse", value: site.contact.email },
+        { label: "E-Mail-Adresse", value: LEGAL_EMAIL },
         { label: "Telefonnummer", value: site.contact.phone },
-        { label: "Steuernummer", value: P, isPlaceholder: true },
-        { label: "Firmenregisternummer", value: P, isPlaceholder: true },
-        { label: "Vertretungsberechtigte Person", value: P, isPlaceholder: true },
       ],
       disclaimer:
-        "Diese Vorlage bildet die gesetzlich geforderten Pflichtangaben ab, ist aber keine Rechtsberatung. Bitte prüfen Sie die Angaben vor der Veröffentlichung.",
+        "Diese Angaben werden nach bestem Wissen bereitgestellt und stellen keine Rechtsberatung dar. Bitte vor der Veröffentlichung fachlich prüfen lassen.",
     },
     datenschutz: {
       title: "Datenschutzerklärung (DSGVO)",
@@ -146,7 +141,7 @@ export function getLegal(locale: string, site: Content): LegalContent {
       sections: [
         {
           heading: "1. Verantwortlicher",
-          body: `Verantwortlich für die Datenverarbeitung: ${site.name}, ${addr}. E-Mail: ${site.contact.email}, Telefon: ${site.contact.phone}. Die vollständigen Unternehmensangaben finden Sie im Impressum.`,
+          body: `Verantwortlich für die Datenverarbeitung: ${site.name}, ${addr}. E-Mail: ${LEGAL_EMAIL}, Telefon: ${site.contact.phone}. Die vollständigen Unternehmensangaben finden Sie im Impressum.`,
         },
         {
           heading: "2. Welche Daten erhoben werden",
@@ -189,7 +184,7 @@ export function getLegal(locale: string, site: Content): LegalContent {
         },
         {
           heading: "7. Kontakt für Datenschutzanfragen",
-          body: `Für Anfragen zum Datenschutz erreichen Sie uns unter: ${site.contact.email}.`,
+          body: `Für Anfragen zum Datenschutz erreichen Sie uns unter: ${LEGAL_EMAIL}.`,
         },
         {
           heading: "8. Cookies",
