@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Content } from "@/content/site";
 import { Logo } from "./Logo";
 
@@ -75,8 +76,16 @@ export function Footer({ site }: { site: Content }) {
           </nav>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-line pt-6 text-sm text-muted sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-line pt-6 text-sm text-muted sm:flex-row">
           <p>{legal.copyright}</p>
+          <nav className="flex items-center gap-5" aria-label="Rechtliches">
+            <Link href={`/${site.locale}/impressum`} className="transition-colors hover:text-gold">
+              {legal.impressum}
+            </Link>
+            <Link href={`/${site.locale}/datenschutz`} className="transition-colors hover:text-gold">
+              {legal.privacy}
+            </Link>
+          </nav>
           <p>{site.tagline}</p>
         </div>
       </div>

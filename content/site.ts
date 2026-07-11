@@ -424,6 +424,8 @@ export const de = {
 
   legal: {
     copyright: `© ${new Date().getFullYear()} Chen's Cooking · Sopron`,
+    impressum: "Impressum",
+    privacy: "Datenschutz",
   },
 };
 

@@ -419,5 +419,7 @@ export const hu: Content = {
 
   legal: {
     copyright: `© ${new Date().getFullYear()} Chen's Cooking · Sopron`,
+    impressum: "Impresszum",
+    privacy: "Adatvédelem",
   },
 };
