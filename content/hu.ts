@@ -81,6 +81,27 @@ export const hu: Content = {
     imageAlt: "Frissen készített sushi- és sashimi-tál a Chen's Cooking pultjánál",
   },
 
+  features: {
+    eyebrow: "Miért a Chen's Cooking",
+    items: [
+      {
+        icon: "leaf",
+        title: "Friss alapanyagok",
+        desc: "Naponta frissen érkezik, és a szeme előtt készül — semmi melegítés, csak becsületes szakmunka.",
+      },
+      {
+        icon: "chef",
+        title: "Tapasztalt séfek",
+        desc: "Szuszi-mester, teppanyaki-grill és wok-konyha profiktól, akik évek óta tökéletesítik a mesterségüket.",
+      },
+      {
+        icon: "flame",
+        title: "Élő konyha a szeme előtt",
+        desc: "Három nyitott állomás, ahol az étel másodpercek alatt, láng felett készül — éttermi minőség büféként.",
+      },
+    ],
+  },
+
   stations: {
     eyebrow: "Élő állomások",
     title: "Három színpad. Egy ízélmény.",

@@ -85,6 +85,27 @@ export const de = {
     imageAlt: "Frisch zubereitete Sushi- und Sashimi-Platte an der Theke von Chen's Cooking",
   },
 
+  features: {
+    eyebrow: "Warum Chen's Cooking",
+    items: [
+      {
+        icon: "leaf",
+        title: "Frische Zutaten",
+        desc: "Täglich frisch angeliefert und vor Ihren Augen zubereitet — kein Aufwärmen, nur ehrliches Handwerk.",
+      },
+      {
+        icon: "chef",
+        title: "Erfahrene Köche",
+        desc: "Sushi-Meister, Teppanyaki-Grill und Wok-Küche von Profis, die ihr Handwerk seit Jahren perfektionieren.",
+      },
+      {
+        icon: "flame",
+        title: "Live vor Ihren Augen",
+        desc: "Drei offene Stationen, an denen Ihr Gericht in Sekunden über der Flamme entsteht — Restaurant-Qualität als Buffet.",
+      },
+    ],
+  },
+
   stations: {
     eyebrow: "Live-Stationen",
     title: "Drei Bühnen. Ein Geschmackserlebnis.",

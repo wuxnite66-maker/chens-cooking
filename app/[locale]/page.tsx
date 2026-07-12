@@ -4,6 +4,7 @@ import { getContent, locales, type Locale } from "@/content/site";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { Features } from "@/components/Features";
 import { About } from "@/components/About";
 import { Stations } from "@/components/Stations";
 import { Experience } from "@/components/Experience";
@@ -49,6 +50,7 @@ export default function LocalePage({ params }: { params: { locale: string } }) {
       <Navbar site={site} />
       <main id="main">
         <Hero site={site} />
+        <Features site={site} />
         <About site={site} />
         <Stations site={site} />
         <Experience site={site} />
