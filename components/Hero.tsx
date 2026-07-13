@@ -43,7 +43,7 @@ export function Hero({ site }: { site: Content }) {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[100svh] items-end overflow-hidden"
+      className="relative isolate flex min-h-[100svh] items-end overflow-hidden"
       aria-label={`${promo.label} – ${promo.headline}`}
     >
       {/* Background image — priority loaded, parallax via transform only */}

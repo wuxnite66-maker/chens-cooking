@@ -12,7 +12,23 @@ export default function SplashPage() {
 
   return (
     <main className="relative flex min-h-dvh flex-col overflow-hidden text-cream">
-      {/* soft vignette so the center content sits calmly on the marble */}
+      {/* Real photo — the terrace & entrance of the restaurant */}
+      <div aria-hidden className="absolute inset-0">
+        <Image
+          src="/images/splash-aussen.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          quality={80}
+          className="object-cover"
+        />
+        {/* dark scrim so the cream/gold text stays readable on the bright sky */}
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/85" />
+      </div>
+
+      {/* soft vignette so the center content sits calmly on the photo */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"

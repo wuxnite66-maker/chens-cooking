@@ -65,8 +65,8 @@ export const de = {
     primaryCta: "Tisch reservieren",
     secondaryCta: "Buffet entdecken",
     takeawayLink: "Oder bestellen Sie zum Mitnehmen",
-    image: "/images/hero-teppanyaki.svg",
-    imageAlt: "Köchin grillt frische Garnelen und Gemüse auf einer glühenden Teppanyaki-Platte",
+    image: "/images/hero-innen.jpg",
+    imageAlt: "Der Gastraum von Chen's Cooking in Sopron mit Blick auf die Teppanyaki- und Wok-Station",
   },
 
   about: {

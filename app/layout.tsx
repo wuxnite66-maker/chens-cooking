@@ -18,21 +18,22 @@ const inter = Inter({
 });
 
 const description =
-  "Chen's Cooking in Wiener Neustadt — All-you-can-eat mit Sushi-Bar, Teppanyaki-Grill und Wok-Station. Frisch vor Ihren Augen zubereitet. Jetzt Tisch reservieren.";
+  "Chen's Cooking in Sopron — All-you-can-eat mit Sushi-Bar, Teppanyaki-Grill und Wok-Station. Frisch vor Ihren Augen zubereitet. Jetzt Tisch reservieren.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.chens-cooking.at"),
+  metadataBase: new URL("https://www.chenscooking.com"),
   title: {
-    default: "Chen's Cooking · Sushi, Teppanyaki & Wok in Wiener Neustadt",
+    default: "Chen's Cooking · Sushi, Teppanyaki & Wok in Sopron",
     template: "%s · Chen's Cooking",
   },
   description,
   keywords: [
-    "All you can eat Wiener Neustadt",
-    "Sushi Wiener Neustadt",
+    "All you can eat Sopron",
+    "Sushi Sopron",
     "Teppanyaki",
     "Wok Buffet",
-    "Chinesisches Restaurant Wiener Neustadt",
+    "Chinesisches Restaurant Sopron",
+    "étterem Sopron",
   ],
   openGraph: {
     type: "website",
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     siteName: "Chen's Cooking",
     title: "Chen's Cooking · Sushi, Teppanyaki & Wok",
     description,
-    images: [{ url: "/images/hero-teppanyaki.svg", width: 1200, height: 630 }],
+    images: [{ url: "/images/hero-innen.jpg", width: 1200, height: 675 }],
   },
   robots: { index: true, follow: true },
 };

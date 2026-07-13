@@ -1,7 +1,7 @@
 import type { Content } from "./site";
 
 /**
- * Hungarian translation — same restaurant (Wiener Neustadt), Hungarian language.
+ * Hungarian translation — same restaurant (Sopron), Hungarian language.
  * Must match the `Content` shape defined by `de` in ./site.ts.
  */
 export const hu: Content = {
@@ -61,8 +61,8 @@ export const hu: Content = {
     primaryCta: "Asztalfoglalás",
     secondaryCta: "Fedezze fel a büfét",
     takeawayLink: "Vagy rendeljen elvitelre",
-    image: "/images/hero-teppanyaki.svg",
-    imageAlt: "Szakácsnő friss garnélát és zöldséget grillez az izzó teppanyaki lapon",
+    image: "/images/hero-innen.jpg",
+    imageAlt: "A Chen's Cooking soproni étterme, háttérben a teppanyaki- és wok-állomással",
   },
 
   about: {
