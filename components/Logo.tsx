@@ -5,7 +5,7 @@ import Image from "next/image";
  * Transparent PNG — sits on the dark navbar/footer. Scales via the `h-*`
  * utility passed in `className`.
  */
-export function Logo({ className = "" }: { className?: string }) {
+export function Logo({ className = "h-11 w-auto sm:h-12" }: { className?: string }) {
   return (
     <Image
       src="/images/chens-logo.png"
@@ -13,7 +13,7 @@ export function Logo({ className = "" }: { className?: string }) {
       width={695}
       height={313}
       priority
-      className={`h-11 w-auto sm:h-12 ${className}`}
+      className={className}
     />
   );
 }

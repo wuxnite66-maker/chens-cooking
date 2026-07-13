@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { site } from "@/content/site";
@@ -49,6 +50,19 @@ export function Splash() {
     const t = setTimeout(() => setIntroDone(true), reduce ? 0 : 1600);
     return () => clearTimeout(t);
   }, [reduce]);
+
+  // Exit curtain: clicking a language closes the curtain, then navigates.
+  const router = useRouter();
+  const [leaving, setLeaving] = useState<string | null>(null);
+  const go = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (leaving) return;
+    if (reduce) {
+      router.push(href);
+      return;
+    }
+    setLeaving(href);
+  };
 
   // Timeline anchors (s) — content enters while the curtain opens
   const D = reduce
@@ -252,7 +266,7 @@ export function Splash() {
           </motion.p>
           <div className="flex flex-col gap-4 sm:items-end">
             {[
-              { href: "/at", tag: "DE", label: "Austria" },
+              { href: "/at", tag: "DE", label: "German" },
               { href: "/hu", tag: "HU", label: "Hungary" },
             ].map((c, i) => (
               <motion.div
@@ -266,6 +280,7 @@ export function Splash() {
               >
                 <Link
                   href={c.href}
+                  onClick={go(c.href)}
                   className="group relative inline-flex items-center gap-4 overflow-hidden rounded-full border border-[rgba(201,162,75,0.45)] bg-[rgba(12,11,9,0.62)] px-8 py-4 font-serif text-3xl text-cream shadow-lg shadow-black/40 backdrop-blur-sm transition-colors duration-300 hover:border-gold hover:bg-gold hover:text-onAccent sm:text-4xl"
                 >
                   {/* soft gold pulse */}
@@ -334,6 +349,25 @@ export function Splash() {
           ))}
         </div>
       </motion.footer>
+
+      {/* ---- Exit curtain: closes over the page, then navigates ---- */}
+      {leaving && (
+        <motion.div
+          aria-hidden
+          className="fixed inset-0 z-[90] flex items-center justify-center bg-[#0b0a09]"
+          initial={{ clipPath: "inset(50% 0 50% 0)" }}
+          animate={{ clipPath: "inset(0 0 0 0)" }}
+          transition={{ duration: 0.65, ease: [0.83, 0, 0.17, 1] }}
+          onAnimationComplete={() => router.push(leaving)}
+        >
+          <motion.span
+            className="h-px w-64 bg-gradient-to-r from-transparent via-gold to-transparent sm:w-[30rem]"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.12, ease: EASE_OUT }}
+          />
+        </motion.div>
+      )}
 
       {/* ---- Intro curtain: gold line draws, then the black splits open ---- */}
       {!reduce && !introDone && (

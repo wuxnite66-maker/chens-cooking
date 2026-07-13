@@ -45,7 +45,7 @@ export function Navbar({ site }: { site: Content }) {
         aria-label={site.ui.mainNav}
       >
         <a href="#main" aria-label={`${site.name} — Startseite`} className="shrink-0">
-          <Logo />
+          <Logo className="h-9 w-auto sm:h-10" />
         </a>
 
         {/* Desktop links */}
