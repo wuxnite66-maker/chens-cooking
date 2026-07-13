@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Content } from "@/content/site";
+import { useCurtainNav } from "./PageTransition";
 
 /**
  * Mobile-only sticky conversion bar. Appears after the hero, hides itself
@@ -9,6 +10,8 @@ import type { Content } from "@/content/site";
  */
 export function StickyMobileCTA({ site }: { site: Content }) {
   const [show, setShow] = useState(false);
+  const leave = useCurtainNav();
+  const reserveHref = `/${site.locale}/reservieren`;
 
   useEffect(() => {
     const onScroll = () => {
@@ -42,7 +45,11 @@ export function StickyMobileCTA({ site }: { site: Content }) {
           </svg>
         </a>
         <a
-          href="#kontakt"
+          href={reserveHref}
+          onClick={(e) => {
+            e.preventDefault();
+            leave(reserveHref);
+          }}
           className="flex h-12 flex-1 items-center justify-center rounded-full bg-gold font-semibold text-onAccent"
         >
           {site.hero.primaryCta}

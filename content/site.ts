@@ -40,7 +40,7 @@ export const de = {
     headline: "Getränke all-inclusive.",
     text: "1. Getränk bestellen — danach ist jedes weitere gratis!",
     price: "8590 Ft",
-    href: "#kontakt",
+    href: "/at/reservieren",
   },
 
   hours: {
@@ -347,12 +347,12 @@ export const de = {
   },
 
   nav: [
-    { label: "Idee", href: "#idee" },
-    { label: "Stationen", href: "#stationen" },
-    { label: "Buffet", href: "#erlebnis" },
-    { label: "Preise", href: "#preise" },
-    { label: "Mitnehmen", href: "#mitnehmen" },
-    { label: "Kontakt", href: "#kontakt" },
+    { label: "Idee", href: "/at/idee" },
+    { label: "Stationen", href: "/at/stationen" },
+    { label: "Buffet", href: "/at/buffet" },
+    { label: "Preise", href: "/at/preise" },
+    { label: "Speisekarte", href: "/at/speisekarte" },
+    { label: "Reservieren", href: "/at/reservieren" },
   ],
 
   // UI micro-copy (buttons, labels, aria) used across components

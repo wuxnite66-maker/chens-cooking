@@ -357,14 +357,14 @@ export function Splash() {
           className="fixed inset-0 z-[90] flex items-center justify-center bg-[#0b0a09]"
           initial={{ clipPath: "inset(50% 0 50% 0)" }}
           animate={{ clipPath: "inset(0 0 0 0)" }}
-          transition={{ duration: 0.65, ease: [0.83, 0, 0.17, 1] }}
+          transition={{ duration: 1.1, ease: [0.83, 0, 0.17, 1] }}
           onAnimationComplete={() => router.push(leaving)}
         >
           <motion.span
             className="h-px w-64 bg-gradient-to-r from-transparent via-gold to-transparent sm:w-[30rem]"
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.12, ease: EASE_OUT }}
+            transition={{ duration: 0.85, delay: 0.15, ease: EASE_OUT }}
           />
         </motion.div>
       )}

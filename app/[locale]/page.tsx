@@ -4,12 +4,6 @@ import { getContent, locales, type Locale } from "@/content/site";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { Stations } from "@/components/Stations";
-import { Experience } from "@/components/Experience";
-import { Pricing } from "@/components/Pricing";
-import { Takeaway } from "@/components/Takeaway";
-import { Reservation } from "@/components/Reservation";
 import { Footer } from "@/components/Footer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { HtmlLang } from "@/components/HtmlLang";
@@ -49,12 +43,6 @@ export default function LocalePage({ params }: { params: { locale: string } }) {
       <Navbar site={site} />
       <main id="main">
         <Hero site={site} />
-        <About site={site} />
-        <Stations site={site} />
-        <Experience site={site} />
-        <Pricing site={site} />
-        <Takeaway site={site} />
-        <Reservation site={site} />
       </main>
       <Footer site={site} />
       <StickyMobileCTA site={site} />

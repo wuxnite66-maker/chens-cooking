@@ -10,6 +10,7 @@ import {
 import { useRef } from "react";
 import type { Content } from "@/content/site";
 import { EASE_OUT } from "@/lib/motion";
+import { useCurtainNav } from "./PageTransition";
 
 function PhoneIcon() {
   return (
@@ -27,6 +28,12 @@ export function Hero({ site }: { site: Content }) {
     offset: ["start start", "end start"],
   });
   const { hero, promo, contact, ui } = site;
+  const leave = useCurtainNav();
+  const menuHref = `/${site.locale}/speisekarte`;
+  const go = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    leave(href);
+  };
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "18%"]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0.62, 0.9]);
@@ -108,6 +115,7 @@ export function Hero({ site }: { site: Content }) {
           <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
             <a
               href={promo.href}
+              onClick={go(promo.href)}
               className="group inline-flex items-center gap-2 rounded-full bg-gold px-7 py-4 font-semibold text-onAccent shadow-lg shadow-black/40 transition-all duration-300 hover:bg-gold-soft hover:shadow-xl active:scale-[0.98]"
             >
               {hero.primaryCta}
@@ -127,7 +135,8 @@ export function Hero({ site }: { site: Content }) {
           {/* Tertiary */}
           <motion.a
             variants={item}
-            href="#mitnehmen"
+            href={menuHref}
+            onClick={go(menuHref)}
             className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-white/75 transition-colors duration-300 hover:text-gold-soft"
           >
             {hero.takeawayLink}
@@ -144,6 +153,7 @@ export function Hero({ site }: { site: Content }) {
           >
             <a
               href={promo.href}
+              onClick={go(promo.href)}
               aria-label={`${promo.label} – ${promo.headline}`}
               className="group relative block aspect-[1080/1350] w-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl shadow-black/70 ring-1 ring-black/50 transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/80 hover:shadow-[0_30px_70px_-18px_rgba(201,162,75,0.5)]"
             >

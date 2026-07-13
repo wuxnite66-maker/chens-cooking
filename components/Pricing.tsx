@@ -1,6 +1,7 @@
 import type { Content } from "@/content/site";
 import { Reveal, RevealItem } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { CurtainLink } from "./PageTransition";
 
 function Check() {
   return (
@@ -59,8 +60,8 @@ export function Pricing({ site }: { site: Content }) {
                   ))}
                 </ul>
 
-                <a
-                  href="#kontakt"
+                <CurtainLink
+                  href={`/${site.locale}/reservieren`}
                   className={`mt-8 inline-flex items-center justify-center rounded-full px-6 py-3.5 font-semibold transition-all duration-300 active:scale-[0.98] ${
                     plan.featured
                       ? "bg-gold text-onAccent hover:bg-gold-soft"
@@ -68,7 +69,7 @@ export function Pricing({ site }: { site: Content }) {
                   }`}
                 >
                   {site.hero.primaryCta}
-                </a>
+                </CurtainLink>
               </article>
             </RevealItem>
           ))}

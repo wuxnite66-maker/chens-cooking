@@ -36,7 +36,7 @@ export const hu: Content = {
     headline: "Italok all inclusive.",
     text: "Rendeld az elsőt — utána minden ital ingyenes!",
     price: "8590 Ft",
-    href: "#kontakt",
+    href: "/hu/reservieren",
   },
 
   hours: {
@@ -343,12 +343,12 @@ export const hu: Content = {
   },
 
   nav: [
-    { label: "Ötlet", href: "#idee" },
-    { label: "Állomások", href: "#stationen" },
-    { label: "Büfé", href: "#erlebnis" },
-    { label: "Árak", href: "#preise" },
-    { label: "Elvitel", href: "#mitnehmen" },
-    { label: "Kapcsolat", href: "#kontakt" },
+    { label: "Ötlet", href: "/hu/idee" },
+    { label: "Állomások", href: "/hu/stationen" },
+    { label: "Büfé", href: "/hu/buffet" },
+    { label: "Árak", href: "/hu/preise" },
+    { label: "Étlap", href: "/hu/speisekarte" },
+    { label: "Foglalás", href: "/hu/reservieren" },
   ],
 
   newsletter: {

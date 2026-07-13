@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Content } from "@/content/site";
 import { Logo } from "./Logo";
+import { CurtainLink } from "./PageTransition";
 
 function WhatsAppIcon({ className = "" }: { className?: string }) {
   return (
@@ -64,12 +65,12 @@ export function Footer({ site }: { site: Content }) {
             <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5">
               {nav.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <CurtainLink
                     href={item.href}
                     className="text-muted transition-colors hover:text-cream"
                   >
                     {item.label}
-                  </a>
+                  </CurtainLink>
                 </li>
               ))}
             </ul>

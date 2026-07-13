@@ -4,12 +4,21 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Content } from "@/content/site";
 import { Logo } from "./Logo";
+import { useCurtainNav } from "./PageTransition";
 
 export function Navbar({ site }: { site: Content }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
   const isHu = site.locale === "hu";
+  const leave = useCurtainNav();
+  const home = `/${site.locale}`;
+  const reserveHref = `${home}/reservieren`;
+  const go = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setOpen(false);
+    leave(href);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -44,7 +53,7 @@ export function Navbar({ site }: { site: Content }) {
         className="mx-auto flex h-full max-w-content items-center justify-between gap-6 px-5 sm:px-8"
         aria-label={site.ui.mainNav}
       >
-        <a href="#main" aria-label={`${site.name} — Startseite`} className="shrink-0">
+        <a href={home} onClick={go(home)} aria-label={`${site.name} — Startseite`} className="shrink-0">
           <Logo className="h-9 w-auto sm:h-10" />
         </a>
 
@@ -54,6 +63,7 @@ export function Navbar({ site }: { site: Content }) {
             <li key={item.href}>
               <a
                 href={item.href}
+                onClick={go(item.href)}
                 className="group relative text-sm font-medium text-muted transition-colors hover:text-cream"
               >
                 {item.label}
@@ -68,6 +78,7 @@ export function Navbar({ site }: { site: Content }) {
           <div className="flex items-center gap-1.5 text-xs font-semibold" aria-label={site.ui.langLabel}>
             <a
               href="/at"
+              onClick={go("/at")}
               aria-current={!isHu ? "page" : undefined}
               className={`transition-colors ${!isHu ? "text-gold" : "text-muted hover:text-cream"}`}
             >
@@ -76,6 +87,7 @@ export function Navbar({ site }: { site: Content }) {
             <span className="text-line">/</span>
             <a
               href="/hu"
+              onClick={go("/hu")}
               aria-current={isHu ? "page" : undefined}
               className={`transition-colors ${isHu ? "text-gold" : "text-muted hover:text-cream"}`}
             >
@@ -84,7 +96,8 @@ export function Navbar({ site }: { site: Content }) {
           </div>
 
           <a
-            href="#kontakt"
+            href={reserveHref}
+            onClick={go(reserveHref)}
             className="hidden rounded-full border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-300 hover:bg-gold hover:text-onAccent lg:inline-block"
           >
             {site.hero.primaryCta}
@@ -137,7 +150,7 @@ export function Navbar({ site }: { site: Content }) {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    onClick={() => setOpen(false)}
+                    onClick={go(item.href)}
                     className="block rounded-lg px-3 py-3 font-serif text-2xl text-cream transition-colors hover:text-gold"
                   >
                     {item.label}
@@ -146,8 +159,8 @@ export function Navbar({ site }: { site: Content }) {
               ))}
               <li className="mt-3">
                 <a
-                  href="#kontakt"
-                  onClick={() => setOpen(false)}
+                  href={reserveHref}
+                  onClick={go(reserveHref)}
                   className="block rounded-full bg-gold px-5 py-3.5 text-center font-semibold text-onAccent"
                 >
                   {site.hero.primaryCta}
