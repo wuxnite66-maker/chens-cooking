@@ -3,6 +3,13 @@
 Eigenständige Website für den Standort Wiener Neustadt (eigene Domain folgt).
 Komplett getrennt vom bestehenden Auftritt — eigenes Design, eigener Code.
 
+## Immer online auf diesem PC (empfohlen)
+
+Einmalig **`IMMER-ONLINE-EINRICHTEN.bat`** doppelklicken — danach läuft die
+Website dauerhaft unsichtbar im Hintergrund und startet bei jedem
+Windows-Start automatisch mit. Erreichbar unter **http://localhost:3000**.
+Entfernen: `IMMER-ONLINE-ENTFERNEN.bat`.
+
 ## Lokal starten — der einfache Weg
 
 1. **Node.js installieren** (einmalig): https://nodejs.org → LTS-Version herunterladen & installieren
