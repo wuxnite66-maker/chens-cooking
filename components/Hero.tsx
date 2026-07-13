@@ -79,7 +79,7 @@ export function Hero({ site }: { site: Content }) {
         style={{ background: "radial-gradient(60% 60% at 20% 80%, rgba(201,162,75,0.22), transparent 70%)" }}
       />
 
-      <div className="mx-auto w-full max-w-content px-5 pb-20 pt-32 sm:px-8 sm:pb-28">
+      <div className="mx-auto w-full max-w-content px-5 pb-20 pt-44 sm:px-8 sm:pb-28 md:pt-32">
         <div className="flex items-center justify-between gap-8">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-3xl">
           {/* Promo badge */}
