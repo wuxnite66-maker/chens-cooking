@@ -208,11 +208,11 @@ export const hu: Content = {
         name: "Levesek",
         note: "",
         items: [
-          { code: "V1", name: "Pikáns leves", price: "1190", desc: "édes-savanyú" },
-          { code: "V2", name: "Csirkeleves bambusszal és gombával", price: "1190", desc: "" },
-          { code: "V3", name: "Tenger gyümölcsei leves", price: "1390", desc: "" },
-          { code: "V4", name: "Miso (tofu) leves", price: "1090", desc: "" },
-          { code: "V5", name: "Zöldségleves", price: "1090", desc: "" },
+          { code: "V1", name: "Pikáns leves", price: "1690", desc: "édes-savanyú" },
+          { code: "V2", name: "Csirkeleves bambusszal és gombával", price: "1690", desc: "" },
+          { code: "V3", name: "Tenger gyümölcsei leves", price: "1890", desc: "" },
+          { code: "V4", name: "Miso (tofu) leves", price: "1590", desc: "" },
+          { code: "V5", name: "Zöldségleves", price: "1590", desc: "" },
         ],
       },
       {

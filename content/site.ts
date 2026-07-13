@@ -212,11 +212,11 @@ export const de = {
         name: "Suppen",
         note: "",
         items: [
-          { code: "V1", name: "Pikante Suppe", price: "1190", desc: "süß-sauer" },
-          { code: "V2", name: "Hühnersuppe mit Bambus und Pilzen", price: "1190", desc: "" },
-          { code: "V3", name: "Meeresfrüchte Suppe", price: "1390", desc: "" },
-          { code: "V4", name: "Misosuppe", price: "1090", desc: "mit Tofu" },
-          { code: "V5", name: "Gemüsesuppe", price: "1090", desc: "" },
+          { code: "V1", name: "Pikante Suppe", price: "1690", desc: "süß-sauer" },
+          { code: "V2", name: "Hühnersuppe mit Bambus und Pilzen", price: "1690", desc: "" },
+          { code: "V3", name: "Meeresfrüchte Suppe", price: "1890", desc: "" },
+          { code: "V4", name: "Misosuppe", price: "1590", desc: "mit Tofu" },
+          { code: "V5", name: "Gemüsesuppe", price: "1590", desc: "" },
         ],
       },
       {
