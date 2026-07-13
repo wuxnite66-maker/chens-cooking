@@ -34,8 +34,9 @@ const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : use
 /** Navigate through the closing curtain. */
 export const useCurtainNav = () => useContext(CurtainCtx);
 
-const CLOSE_S = 1.0; // closing curtain duration
-const OPEN_S = 0.9; // opening curtain duration
+// Total transition ≈ 1.5s: close 0.75s + swap ~0.1s + open 0.65s
+const CLOSE_S = 0.75; // closing curtain duration
+const OPEN_S = 0.65; // opening curtain duration
 const EASE_CURTAIN: [number, number, number, number] = [0.83, 0, 0.17, 1];
 
 export function CurtainProvider({ children }: { children: React.ReactNode }) {
@@ -95,7 +96,7 @@ export function CurtainProvider({ children }: { children: React.ReactNode }) {
           className="pointer-events-none fixed inset-0 z-[90] flex items-center justify-center bg-[#0b0a09]"
           initial={{ clipPath: "inset(0 0 0 0)" }}
           animate={{ clipPath: "inset(50% 0 50% 0)" }}
-          transition={{ delay: 0.15, duration: OPEN_S, ease: EASE_CURTAIN }}
+          transition={{ delay: 0.1, duration: OPEN_S, ease: EASE_CURTAIN }}
         >
           <motion.span
             className="h-px w-64 bg-gradient-to-r from-transparent via-gold to-transparent sm:w-[30rem]"
