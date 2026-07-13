@@ -3,21 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { site } from "@/content/site";
 import { EASE_OUT } from "@/lib/motion";
 
 /**
  * Cinematic splash / language gate.
  * Sequence: gold line draws on black → curtain splits open → Ken-Burns photo,
- * letter-cascade wordmark, shimmer sweep, floating gold embers, mouse
- * parallax, glowing country buttons, rising info bar. Honours reduced motion.
+ * letter-cascade wordmark, shimmer sweep, floating gold embers, glowing
+ * country buttons, rising info bar. Honours reduced motion.
  */
 
 // Words wrap as units (no mid-word line breaks); letters keep a global index
@@ -56,15 +50,6 @@ export function Splash() {
     return () => clearTimeout(t);
   }, [reduce]);
 
-  // Mouse parallax (photo drifts against the cursor, content with it)
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const spring = { stiffness: 42, damping: 18, mass: 0.6 };
-  const bgX = useSpring(useTransform(mx, [-1, 1], [12, -12]), spring);
-  const bgY = useSpring(useTransform(my, [-1, 1], [9, -9]), spring);
-  const fgX = useSpring(useTransform(mx, [-1, 1], [-7, 7]), spring);
-  const fgY = useSpring(useTransform(my, [-1, 1], [-5, 5]), spring);
-
   // Timeline anchors (s) — content enters while the curtain opens
   const D = reduce
     ? { kicker: 0, letters: 0, line: 0.1, sub: 0.1, choose: 0.2, btns: 0.2, bar: 0.3, logo: 0, corners: 0.3 }
@@ -82,15 +67,9 @@ export function Splash() {
         };
 
   return (
-    <main
-      className="relative flex min-h-dvh flex-col overflow-hidden text-cream"
-      onMouseMove={(e) => {
-        mx.set((e.clientX / window.innerWidth) * 2 - 1);
-        my.set((e.clientY / window.innerHeight) * 2 - 1);
-      }}
-    >
-      {/* ---- Backdrop: real photo, Ken-Burns zoom + parallax ---- */}
-      <motion.div aria-hidden className="absolute inset-0" style={reduce ? undefined : { x: bgX, y: bgY, scale: 1.04 }}>
+    <main className="relative flex min-h-dvh flex-col overflow-hidden text-cream">
+      {/* ---- Backdrop: real photo, slow Ken-Burns zoom ---- */}
+      <div aria-hidden className="absolute inset-0">
         <motion.div
           className="absolute inset-0"
           initial={reduce ? false : { scale: 1.18 }}
@@ -123,7 +102,7 @@ export function Splash() {
           animate={reduce ? undefined : { opacity: [0.4, 0.85, 0.4], scale: [1, 1.12, 1] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         />
-      </motion.div>
+      </div>
 
       {/* soft vignette so the center content sits calmly on the photo */}
       <div
@@ -195,10 +174,7 @@ export function Splash() {
       </motion.div>
 
       {/* ---- Content ---- */}
-      <motion.div
-        className="relative z-10 mx-auto flex w-full max-w-content flex-1 flex-col px-6 sm:px-10"
-        style={reduce ? undefined : { x: fgX, y: fgY }}
-      >
+      <div className="relative z-10 mx-auto flex w-full max-w-content flex-1 flex-col px-6 sm:px-10">
         {/* Wordmark */}
         <div className="pt-28 sm:pt-40">
           <motion.p
@@ -322,7 +298,7 @@ export function Splash() {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* ---- Bottom info bar rises in ---- */}
       <motion.footer
