@@ -352,8 +352,15 @@ export const de = {
     { label: "Buffet", href: "/at/buffet" },
     { label: "Preise", href: "/at/preise" },
     { label: "Speisekarte", href: "/at/speisekarte" },
+    { label: "Öffnungszeiten", href: "/at/oeffnungszeiten" },
     { label: "Reservieren", href: "/at/reservieren" },
   ],
+
+  hoursPage: {
+    eyebrow: "Öffnungszeiten",
+    title: "Wann Sie uns besuchen können",
+    sub: "Alle Zeiten auf einen Blick — mit Live-Status, ob gerade geöffnet ist.",
+  },
 
   // UI micro-copy (buttons, labels, aria) used across components
   newsletter: {

@@ -348,8 +348,15 @@ export const hu: Content = {
     { label: "Büfé", href: "/hu/buffet" },
     { label: "Árak", href: "/hu/preise" },
     { label: "Étlap", href: "/hu/speisekarte" },
+    { label: "Nyitvatartás", href: "/hu/oeffnungszeiten" },
     { label: "Foglalás", href: "/hu/reservieren" },
   ],
+
+  hoursPage: {
+    eyebrow: "Nyitvatartás",
+    title: "Mikor látogathat meg minket",
+    sub: "Minden időpont egy helyen — élő státusszal, hogy éppen nyitva vagyunk-e.",
+  },
 
   newsletter: {
     image: "/images/newsletter-hu.jpg",

@@ -8,6 +8,7 @@ import { Stations } from "@/components/Stations";
 import { Experience } from "@/components/Experience";
 import { Pricing } from "@/components/Pricing";
 import { Takeaway } from "@/components/Takeaway";
+import { HoursSection } from "@/components/HoursSection";
 import { Reservation } from "@/components/Reservation";
 import { Footer } from "@/components/Footer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
@@ -23,6 +24,7 @@ const SECTIONS = {
   buffet: Experience,
   preise: Pricing,
   speisekarte: Takeaway,
+  oeffnungszeiten: HoursSection,
   reservieren: Reservation,
 } as const;
 

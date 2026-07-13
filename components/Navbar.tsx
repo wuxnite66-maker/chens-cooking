@@ -44,36 +44,38 @@ export function Navbar({ site }: { site: Content }) {
     <header
       className={`fixed inset-x-0 top-[var(--promo-h)] z-50 border-b backdrop-blur-md transition-colors duration-500 ${
         scrolled || open
-          ? "border-line bg-ink/90 shadow-sm shadow-black/5"
-          : "border-transparent bg-ink/70"
+          ? "border-line bg-[rgba(12,13,10,0.92)] shadow-sm shadow-black/5"
+          : "border-transparent bg-[rgba(12,13,10,0.72)]"
       }`}
       style={{ height: "var(--header-h)" }}
     >
       <nav
-        className="mx-auto flex h-full max-w-content items-center justify-between gap-6 px-5 sm:px-8"
+        className="mx-auto flex h-full max-w-content items-center justify-between gap-3 px-4 sm:gap-4 sm:px-6"
         aria-label={site.ui.mainNav}
       >
         <a href={home} onClick={go(home)} aria-label={`${site.name} — Startseite`} className="shrink-0">
-          <Logo className="h-9 w-auto sm:h-10" />
+          <Logo className="h-8 w-auto sm:h-9" />
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-8 lg:flex">
-          {site.nav.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                onClick={go(item.href)}
-                className="group relative text-sm font-medium text-muted transition-colors hover:text-cream"
-              >
-                {item.label}
-                <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold transition-all duration-300 ease-out-soft group-hover:w-full" />
-              </a>
-            </li>
-          ))}
-        </ul>
+        {/* Category strip — centered when it fits, swipeable when narrow */}
+        <div className="min-w-0 flex-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <ul className="mx-auto flex w-max items-center gap-4 px-1 md:gap-5 lg:gap-6">
+            {site.nav.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  onClick={go(item.href)}
+                  className="group relative whitespace-nowrap text-[13px] font-medium text-muted transition-colors hover:text-cream"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold transition-all duration-300 ease-out-soft group-hover:w-full" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-3">
           {/* Language switch */}
           <div className="flex items-center gap-1.5 text-xs font-semibold" aria-label={site.ui.langLabel}>
             <a
@@ -98,7 +100,7 @@ export function Navbar({ site }: { site: Content }) {
           <a
             href={reserveHref}
             onClick={go(reserveHref)}
-            className="hidden rounded-full border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-300 hover:bg-gold hover:text-onAccent lg:inline-block"
+            className="hidden rounded-full border border-gold/40 px-5 py-2 text-sm font-semibold text-gold transition-all duration-300 hover:bg-gold hover:text-onAccent xl:inline-block"
           >
             {site.hero.primaryCta}
           </a>
@@ -143,7 +145,7 @@ export function Navbar({ site }: { site: Content }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: reduce ? 0 : -8 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 top-full border-b border-line bg-ink/95 backdrop-blur-lg lg:hidden"
+            className="absolute inset-x-0 top-full border-b border-line bg-[rgba(10,11,8,0.98)] shadow-2xl shadow-black/60 backdrop-blur-lg lg:hidden"
           >
             <ul className="mx-auto flex max-w-content flex-col gap-1 px-5 py-6 sm:px-8">
               {site.nav.map((item) => (
