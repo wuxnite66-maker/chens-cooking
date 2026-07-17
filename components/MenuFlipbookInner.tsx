@@ -10,7 +10,7 @@ const PAGES = Array.from(
   { length: PAGE_COUNT },
   (_, i) => `/menu/pages/${String(i + 1).padStart(2, "0")}.jpg`,
 );
-const RATIO = 1.4003; // landscape leaf (matches the rendered pages)
+const RATIO = 1.4057; // landscape leaf (matches the rendered pages, 3401x2418)
 
 type Anim = { dir: "next" | "prev"; from: number; to: number };
 
