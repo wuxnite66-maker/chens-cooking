@@ -50,7 +50,7 @@ export function GalleryGrid() {
               type="button"
               onClick={() => setActive(i)}
               aria-label={`Bild vergrößern: ${img.alt}`}
-              className="group block w-full overflow-hidden rounded-2xl border border-line text-left"
+              className="group relative block w-full overflow-hidden rounded-2xl border border-line text-left"
             >
               <SmartImage
                 src={img.src}
@@ -59,9 +59,17 @@ export function GalleryGrid() {
                 height={img.tall ? 1000 : 600}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 rounded="rounded-none"
-                className="w-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]"
+                className="w-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.05]"
                 wrapperClassName={img.tall ? "aspect-[4/5]" : "aspect-[4/3]"}
               />
+              {/* Caption slides up on hover */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-black/85 to-transparent px-5 pb-4 pt-10 text-sm text-cream opacity-0 transition-all duration-500 ease-out-soft group-hover:translate-y-0 group-hover:opacity-100"
+              >
+                {img.alt}
+                <span className="ml-2 text-gold">⊕</span>
+              </span>
             </button>
           </RevealItem>
         ))}

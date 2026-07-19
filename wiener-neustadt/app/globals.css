@@ -129,3 +129,115 @@ body::before {
   background: var(--gold);
   color: #0b0906;
 }
+
+/* ————— Animation toolkit ————— */
+
+/* Infinite ribbon (content duplicated → -50% loops seamlessly) */
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Rising gold embers in the hero */
+.ember {
+  position: absolute;
+  bottom: -2vh;
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--gold-soft), var(--gold) 60%, transparent 75%);
+  opacity: 0;
+  pointer-events: none;
+  animation: emberRise linear infinite;
+}
+@keyframes emberRise {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.75;
+  }
+  55% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-78vh) translateX(3vw) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* Light sweep across buttons/images on hover */
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.btn-sheen::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -70%;
+  width: 45%;
+  transform: skewX(-20deg) translateX(0);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.btn-sheen:hover::after {
+  transform: skewX(-20deg) translateX(420%);
+}
+
+/* Breathing gold glow (featured pricing card, CTA band) */
+.glow-pulse {
+  position: relative;
+}
+.glow-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  box-shadow: 0 0 42px 6px rgba(198, 161, 91, 0.28);
+  opacity: 0.5;
+  animation: glowPulse 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Slow cinematic zoom for static hero images (subpages) */
+.kenburns {
+  animation: kenburns 14s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Gentle floating (ornaments, script accents) */
+.float-slow {
+  animation: floatSlow 5.5s ease-in-out infinite;
+}
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}

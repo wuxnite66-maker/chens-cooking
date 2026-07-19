@@ -20,10 +20,10 @@ export function Pricing() {
           {pricing.plans.map((plan) => (
             <RevealItem key={plan.name} className="h-full">
               <article
-                className={`relative flex h-full flex-col rounded-2xl border p-8 transition-transform duration-500 ease-out-soft hover:-translate-y-1 ${
+                className={`relative flex h-full flex-col rounded-2xl border p-8 transition-transform duration-500 ease-out-soft hover:-translate-y-2 ${
                   plan.featured
-                    ? "border-gold bg-surface-2 shadow-xl shadow-black/40"
-                    : "border-line bg-ink/60"
+                    ? "glow-pulse border-gold bg-surface-2 shadow-xl shadow-black/40"
+                    : "border-line bg-ink/60 hover:border-gold/40"
                 }`}
               >
                 {plan.featured && (

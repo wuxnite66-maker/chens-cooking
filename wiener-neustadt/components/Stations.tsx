@@ -28,15 +28,17 @@ export function Stations() {
                 i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
               }`}
             >
-              <SmartImage
-                src={station.image}
-                alt={station.alt}
-                width={960}
-                height={720}
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="h-full w-full object-cover"
-                wrapperClassName="aspect-[4/3]"
-              />
+              <div className="group overflow-hidden rounded-2xl">
+                <SmartImage
+                  src={station.image}
+                  alt={station.alt}
+                  width={960}
+                  height={720}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out-soft group-hover:scale-[1.06]"
+                  wrapperClassName="aspect-[4/3]"
+                />
+              </div>
               <div>
                 <span aria-hidden className="font-serif text-5xl text-gold/40">
                   {numerals[i] ?? ""}

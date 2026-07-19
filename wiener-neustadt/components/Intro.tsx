@@ -1,4 +1,5 @@
 import { site } from "@/content/site";
+import { Counter } from "./Counter";
 import { Reveal } from "./Reveal";
 import { SmartImage } from "./SmartImage";
 
@@ -8,14 +9,14 @@ export function Intro() {
   return (
     <section aria-label={intro.eyebrow} className="py-section">
       <div className="mx-auto grid max-w-content items-center gap-12 px-5 sm:px-8 md:grid-cols-2 md:gap-16">
-        <Reveal>
+        <Reveal className="group">
           <SmartImage
             src={intro.image}
             alt={intro.imageAlt}
             width={960}
             height={1100}
             sizes="(min-width: 768px) 50vw, 100vw"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out-soft group-hover:scale-[1.05]"
             wrapperClassName="aspect-[6/7]"
           />
         </Reveal>
@@ -35,7 +36,7 @@ export function Intro() {
             {intro.stats.map((stat) => (
               <div key={stat.label}>
                 <p className="tabular font-serif text-3xl font-semibold text-gold sm:text-4xl">
-                  {stat.value}
+                  <Counter value={stat.value} />
                 </p>
                 <p className="mt-1 text-xs uppercase tracking-label text-muted">{stat.label}</p>
               </div>

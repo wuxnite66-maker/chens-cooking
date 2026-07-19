@@ -3,8 +3,10 @@ import { site } from "@/content/site";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { Intro } from "@/components/Intro";
+import { Marquee } from "@/components/Marquee";
 import { Reveal, RevealItem } from "@/components/Reveal";
 import { SmartImage } from "@/components/SmartImage";
+import { TiltCard } from "@/components/TiltCard";
 import { CtaBand } from "@/components/CtaBand";
 
 /** Startseite: Hero → Features → Konzept → Stationen-Teaser → Galerie-Strip → CTA */
@@ -13,6 +15,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Features />
+      <Marquee />
       <Intro />
 
       {/* Stationen-Teaser → /buffet */}
@@ -28,29 +31,31 @@ export default function HomePage() {
           <Reveal stagger className="mt-14 grid gap-6 md:grid-cols-3">
             {site.stations.items.map((station) => (
               <RevealItem key={station.name}>
-                <Link
-                  href="/buffet"
-                  className="group block overflow-hidden rounded-2xl border border-line bg-ink/60 transition-transform duration-500 ease-out-soft hover:-translate-y-1"
-                >
-                  <SmartImage
-                    src={station.image}
-                    alt={station.alt}
-                    width={640}
-                    height={480}
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    rounded="rounded-none"
-                    className="w-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.04]"
-                    wrapperClassName="aspect-[4/3]"
-                  />
-                  <div className="p-6">
-                    <h3 className="font-serif text-2xl font-semibold text-cream">{station.name}</h3>
-                    <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{station.desc}</p>
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-gold-soft">
-                      Mehr erfahren
-                      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </span>
-                  </div>
-                </Link>
+                <TiltCard className="h-full">
+                  <Link
+                    href="/buffet"
+                    className="group block h-full overflow-hidden rounded-2xl border border-line bg-ink/60 transition-[border-color,box-shadow] duration-500 hover:border-gold/40 hover:shadow-[0_18px_50px_rgba(0,0,0,0.45)]"
+                  >
+                    <SmartImage
+                      src={station.image}
+                      alt={station.alt}
+                      width={640}
+                      height={480}
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      rounded="rounded-none"
+                      className="w-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.06]"
+                      wrapperClassName="aspect-[4/3]"
+                    />
+                    <div className="p-6">
+                      <h3 className="font-serif text-2xl font-semibold text-cream">{station.name}</h3>
+                      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{station.desc}</p>
+                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-gold-soft">
+                        Mehr erfahren
+                        <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                      </span>
+                    </div>
+                  </Link>
+                </TiltCard>
               </RevealItem>
             ))}
           </Reveal>

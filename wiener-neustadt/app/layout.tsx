@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { CookieNotice } from "@/components/CookieNotice";
+import { IntroOverlay } from "@/components/IntroOverlay";
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -95,6 +96,7 @@ export default function RootLayout({
         >
           Zum Inhalt springen
         </a>
+        <IntroOverlay />
         <ScrollProgress />
         <Navbar />
         <main id="main">{children}</main>

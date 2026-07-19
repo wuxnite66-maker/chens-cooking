@@ -65,15 +65,15 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
-              className={`relative py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
+              className={`group/link relative py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
                 isActive(item.href) ? "text-gold-soft" : "text-cream/80 hover:text-cream"
               }`}
             >
               {item.label}
               <span
                 aria-hidden
-                className={`absolute inset-x-0 -bottom-0.5 h-px bg-gold transition-opacity duration-300 ${
-                  isActive(item.href) ? "opacity-100" : "opacity-0"
+                className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-gold transition-transform duration-300 ease-out-soft ${
+                  isActive(item.href) ? "scale-x-100" : "scale-x-0 group-hover/link:scale-x-100"
                 }`}
               />
             </Link>
