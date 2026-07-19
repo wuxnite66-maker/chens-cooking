@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Warm espresso-black canvas + champagne gold + restrained dark red.
+     Deliberately warmer than a plain #000 so food photography glows.
+     The *-rgb channel triplets exist so Tailwind opacity modifiers
+     (e.g. bg-ink/70) can compose alpha — keep both in sync. */
+  --ink: #0a0806;
+  --ink-rgb: 10 8 6;
+  --surface: #14100c;
+  --surface-rgb: 20 16 12;
+  --surface-2: #1d1712;
+  --surface-2-rgb: 29 23 18;
+  --line: rgba(198, 161, 91, 0.18);
+  --cream: #f4ede0;
+  --muted: #a49889;
+  --gold: #c6a15b;
+  --gold-rgb: 198 161 91;
+  --gold-soft: #e6cd93;
+  --gold-deep: #93743a;
+  --crimson: #9e3b32;
+  --on-accent: #191008;
+
+  --header-h: 84px;
+
+  /* Native widgets (date/time pickers, selects, scrollbars) in dark */
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--ink);
+  color: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Faint warm glow at the top of the page — pure CSS, no image request */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 45% at 50% 0%, rgba(198, 161, 91, 0.07), transparent 70%),
+    radial-gradient(50% 40% at 85% 100%, rgba(158, 59, 50, 0.05), transparent 70%);
+}
+
+/* Tabular figures for prices so columns don't shift */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Eyebrow / kicker label */
+.kicker {
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* Thin gold rule */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold) 35%,
+    var(--gold) 65%,
+    transparent
+  );
+  opacity: 0.45;
+}
+
+/* Skeleton shimmer for image slots before load */
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  animation: shimmer 1.6s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Visible, on-brand focus ring (never removed) */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--gold-soft);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Respect reduced motion globally as a safety net */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: var(--gold);
+  color: #0b0906;
+}
+
+/* ————— Animation toolkit ————— */
+
+/* Infinite ribbon (content duplicated → -50% loops seamlessly) */
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Rising gold embers in the hero */
+.ember {
+  position: absolute;
+  bottom: -2vh;
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--gold-soft), var(--gold) 60%, transparent 75%);
+  opacity: 0;
+  pointer-events: none;
+  animation: emberRise linear infinite;
+}
+@keyframes emberRise {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.75;
+  }
+  55% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-78vh) translateX(3vw) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* Light sweep across buttons/images on hover */
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.btn-sheen::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -70%;
+  width: 45%;
+  transform: skewX(-20deg) translateX(0);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.btn-sheen:hover::after {
+  transform: skewX(-20deg) translateX(420%);
+}
+
+/* Breathing gold glow (featured pricing card, CTA band) */
+.glow-pulse {
+  position: relative;
+}
+.glow-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  box-shadow: 0 0 42px 6px rgba(198, 161, 91, 0.28);
+  opacity: 0.5;
+  animation: glowPulse 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Slow cinematic zoom for static hero images (subpages) */
+.kenburns {
+  animation: kenburns 14s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Gentle floating (ornaments, script accents) */
+.float-slow {
+  animation: floatSlow 5.5s ease-in-out infinite;
+}
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}

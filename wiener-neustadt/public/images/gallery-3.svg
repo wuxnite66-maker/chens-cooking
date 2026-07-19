@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Wok">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0a09"/>
+      <stop offset="1" stop-color="#1a1510"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.7" cy="0.25" r="0.9">
+      <stop offset="0" stop-color="#b5392f" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#b5392f" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#b5392f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <rect width="800" height="800" fill="url(#glow)"/>
+  <g stroke="#c9a24b" stroke-opacity="0.18" fill="none">
+    <circle cx="400" cy="320" r="160"/>
+    <circle cx="400" cy="320" r="240"/>
+  </g>
+  <g stroke="#c9a24b" stroke-opacity="0.35" stroke-width="2">
+    <path d="M40 40 L40 70 M40 40 L70 40"/>
+    <path d="M760 40 L760 70 M760 40 L730 40"/>
+    <path d="M40 760 L40 730 M40 760 L70 760"/>
+    <path d="M760 760 L760 730 M760 760 L730 760"/>
+  </g>
+  <text x="50%" y="480" text-anchor="middle" fill="#c9a24b" font-family="Georgia, 'Times New Roman', serif" font-size="15" letter-spacing="6" opacity="0.85">CHEN&#8217;S COOKING</text>
+  <text x="50%" y="528" text-anchor="middle" fill="#f6f1e9" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="67" font-weight="600">Wok</text>
+  <text x="50%" y="588" text-anchor="middle" fill="#a59b8d" font-family="Georgia, serif" font-size="11" letter-spacing="3">BILDPLATZHALTER</text>
+</svg>
