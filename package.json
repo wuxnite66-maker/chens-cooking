@@ -2,7 +2,7 @@
   "name": "chens-cooking",
   "version": "1.0.0",
   "private": true,
-  "description": "Premium All-you-can-eat Sushi · Teppanyaki · Wok — Chen's Cooking, Wiener Neustadt",
+  "description": "Premium All-you-can-eat Sushi · Teppanyaki · Wok — Chen's Cooking, Sopron",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

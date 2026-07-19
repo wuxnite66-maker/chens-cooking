@@ -40,7 +40,7 @@ export const de = {
     headline: "Getränke all-inclusive.",
     text: "1. Getränk bestellen — danach ist jedes weitere gratis!",
     price: "8590 Ft",
-    href: "#kontakt",
+    href: "/at/reservieren",
   },
 
   hours: {
@@ -65,8 +65,8 @@ export const de = {
     primaryCta: "Tisch reservieren",
     secondaryCta: "Buffet entdecken",
     takeawayLink: "Oder bestellen Sie zum Mitnehmen",
-    image: "/images/hero-teppanyaki.svg",
-    imageAlt: "Köchin grillt frische Garnelen und Gemüse auf einer glühenden Teppanyaki-Platte",
+    image: "/images/hero-innen.jpg",
+    imageAlt: "Der Gastraum von Chen's Cooking in Sopron mit Blick auf die Teppanyaki- und Wok-Station",
   },
 
   about: {
@@ -83,27 +83,6 @@ export const de = {
     ],
     image: "/images/about-sushi-counter.svg",
     imageAlt: "Frisch zubereitete Sushi- und Sashimi-Platte an der Theke von Chen's Cooking",
-  },
-
-  features: {
-    eyebrow: "Warum Chen's Cooking",
-    items: [
-      {
-        icon: "leaf",
-        title: "Frische Zutaten",
-        desc: "Täglich frisch angeliefert und vor Ihren Augen zubereitet — kein Aufwärmen, nur ehrliches Handwerk.",
-      },
-      {
-        icon: "chef",
-        title: "Erfahrene Köche",
-        desc: "Sushi-Meister, Teppanyaki-Grill und Wok-Küche von Profis, die ihr Handwerk seit Jahren perfektionieren.",
-      },
-      {
-        icon: "flame",
-        title: "Live vor Ihren Augen",
-        desc: "Drei offene Stationen, an denen Ihr Gericht in Sekunden über der Flamme entsteht — Restaurant-Qualität als Buffet.",
-      },
-    ],
   },
 
   stations: {
@@ -248,7 +227,7 @@ export const de = {
           { code: "V8", name: "Champignon gebacken", price: "1590", desc: "" },
           { code: "V9", name: "Kyosa", price: "1790", desc: "5 Teigtaschen mit Fleisch und Gemüse gefüllt" },
           { code: "V10", name: "Sateh Ayam", price: "1690", desc: "2 Hühnerspießchen auf Salat" },
-          { code: "V11", name: "Garnelenspießchen", price: "1790", desc: "2 Stück, auf Salat" },
+          { code: "V11", name: "Garnelenspießchen", price: "1790", desc: "3 Stück, auf Salat" },
         ],
       },
       {
@@ -368,13 +347,20 @@ export const de = {
   },
 
   nav: [
-    { label: "Idee", href: "#idee" },
-    { label: "Stationen", href: "#stationen" },
-    { label: "Buffet", href: "#erlebnis" },
-    { label: "Preise", href: "#preise" },
-    { label: "Mitnehmen", href: "#mitnehmen" },
-    { label: "Kontakt", href: "#kontakt" },
+    { label: "Idee", href: "/at/idee" },
+    { label: "Stationen", href: "/at/stationen" },
+    { label: "Buffet", href: "/at/buffet" },
+    { label: "Preise", href: "/at/preise" },
+    { label: "Speisekarte", href: "/at/speisekarte" },
+    { label: "Öffnungszeiten", href: "/at/oeffnungszeiten" },
+    { label: "Reservieren", href: "/at/reservieren" },
   ],
+
+  hoursPage: {
+    eyebrow: "Öffnungszeiten",
+    title: "Wann Sie uns besuchen können",
+    sub: "Alle Zeiten auf einen Blick — mit Live-Status, ob gerade geöffnet ist.",
+  },
 
   // UI micro-copy (buttons, labels, aria) used across components
   newsletter: {

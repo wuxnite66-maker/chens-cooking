@@ -18,8 +18,16 @@
   --lacquer: #cf5a49;
   --on-accent: #1b130b; /* text on gold */
 
-  --header-h: 76px;
+  /* Mobile: two-row navbar (logo row + category row) — taller.
+     md+: single row. Section paddings/scroll offsets follow automatically. */
+  --header-h: 92px;
   --promo-h: 44px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 60px;
+  }
 }
 
 * {

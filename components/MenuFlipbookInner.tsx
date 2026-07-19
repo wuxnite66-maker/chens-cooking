@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { Content } from "@/content/site";
 
-// Rendered menu pages (Speisekarte 2026, spreads 01–06). See public/menu/pages.
-const PAGE_COUNT = 6;
+// Rendered menu pages (food spreads 01–06, drinks 07). See public/menu/pages.
+const PAGE_COUNT = 7;
 const PAGES = Array.from(
   { length: PAGE_COUNT },
   (_, i) => `/menu/pages/${String(i + 1).padStart(2, "0")}.jpg`,
 );
-const RATIO = 1.4061; // landscape leaf (matches the rendered pages)
+const RATIO = 1.4057; // landscape leaf (matches the rendered pages, 3401x2418)
 
 type Anim = { dir: "next" | "prev"; from: number; to: number };
 

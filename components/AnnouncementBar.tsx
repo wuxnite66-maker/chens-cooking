@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { Content } from "@/content/site";
+import { CurtainLink } from "./PageTransition";
 
 /**
  * Slim, luxurious promo bar pinned above the navbar. Gold gradient with a
@@ -8,7 +8,7 @@ import type { Content } from "@/content/site";
 export function AnnouncementBar({ site }: { site: Content }) {
   const p = site.promo;
   return (
-    <Link
+    <CurtainLink
       href={p.href}
       aria-label={`${p.label}: ${p.text} — ${p.price}`}
       className="group fixed inset-x-0 top-0 z-[60] flex h-[var(--promo-h)] items-center justify-center overflow-hidden bg-gradient-to-r from-gold-deep via-gold to-gold-deep text-onAccent"
@@ -35,6 +35,6 @@ export function AnnouncementBar({ site }: { site: Content }) {
           →
         </span>
       </div>
-    </Link>
+    </CurtainLink>
   );
 }

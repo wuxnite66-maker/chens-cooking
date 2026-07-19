@@ -1,7 +1,7 @@
 import type { Content } from "./site";
 
 /**
- * Hungarian translation — same restaurant (Wiener Neustadt), Hungarian language.
+ * Hungarian translation — same restaurant (Sopron), Hungarian language.
  * Must match the `Content` shape defined by `de` in ./site.ts.
  */
 export const hu: Content = {
@@ -36,7 +36,7 @@ export const hu: Content = {
     headline: "Italok all inclusive.",
     text: "Rendeld az elsőt — utána minden ital ingyenes!",
     price: "8590 Ft",
-    href: "#kontakt",
+    href: "/hu/reservieren",
   },
 
   hours: {
@@ -61,8 +61,8 @@ export const hu: Content = {
     primaryCta: "Asztalfoglalás",
     secondaryCta: "Fedezze fel a büfét",
     takeawayLink: "Vagy rendeljen elvitelre",
-    image: "/images/hero-teppanyaki.svg",
-    imageAlt: "Szakácsnő friss garnélát és zöldséget grillez az izzó teppanyaki lapon",
+    image: "/images/hero-innen.jpg",
+    imageAlt: "A Chen's Cooking soproni étterme, háttérben a teppanyaki- és wok-állomással",
   },
 
   about: {
@@ -79,27 +79,6 @@ export const hu: Content = {
     ],
     image: "/images/about-sushi-counter.svg",
     imageAlt: "Frissen készített sushi- és sashimi-tál a Chen's Cooking pultjánál",
-  },
-
-  features: {
-    eyebrow: "Miért a Chen's Cooking",
-    items: [
-      {
-        icon: "leaf",
-        title: "Friss alapanyagok",
-        desc: "Naponta frissen érkezik, és a szeme előtt készül — semmi melegítés, csak becsületes szakmunka.",
-      },
-      {
-        icon: "chef",
-        title: "Tapasztalt séfek",
-        desc: "Szuszi-mester, teppanyaki-grill és wok-konyha profiktól, akik évek óta tökéletesítik a mesterségüket.",
-      },
-      {
-        icon: "flame",
-        title: "Élő konyha a szeme előtt",
-        desc: "Három nyitott állomás, ahol az étel másodpercek alatt, láng felett készül — éttermi minőség büféként.",
-      },
-    ],
   },
 
   stations: {
@@ -244,7 +223,7 @@ export const hu: Content = {
           { code: "V8", name: "Gomba sütve", price: "1590", desc: "" },
           { code: "V9", name: "Kyosa", price: "1790", desc: "5 db tésztapárna hússal és zöldséggel töltve" },
           { code: "V10", name: "Sateh Ayam", price: "1690", desc: "2 db csirkenyárs salátaágyon" },
-          { code: "V11", name: "Garnéla nyárson salátával", price: "1790", desc: "2 db" },
+          { code: "V11", name: "Garnéla nyárson salátával", price: "1790", desc: "3 db" },
         ],
       },
       {
@@ -364,13 +343,20 @@ export const hu: Content = {
   },
 
   nav: [
-    { label: "Ötlet", href: "#idee" },
-    { label: "Állomások", href: "#stationen" },
-    { label: "Büfé", href: "#erlebnis" },
-    { label: "Árak", href: "#preise" },
-    { label: "Elvitel", href: "#mitnehmen" },
-    { label: "Kapcsolat", href: "#kontakt" },
+    { label: "Ötlet", href: "/hu/idee" },
+    { label: "Állomások", href: "/hu/stationen" },
+    { label: "Büfé", href: "/hu/buffet" },
+    { label: "Árak", href: "/hu/preise" },
+    { label: "Étlap", href: "/hu/speisekarte" },
+    { label: "Nyitvatartás", href: "/hu/oeffnungszeiten" },
+    { label: "Foglalás", href: "/hu/reservieren" },
   ],
+
+  hoursPage: {
+    eyebrow: "Nyitvatartás",
+    title: "Mikor látogathat meg minket",
+    sub: "Minden időpont egy helyen — élő státusszal, hogy éppen nyitva vagyunk-e.",
+  },
 
   newsletter: {
     image: "/images/newsletter-hu.jpg",

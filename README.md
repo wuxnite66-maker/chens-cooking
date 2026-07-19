@@ -1,4 +1,4 @@
-# Chen's Cooking — Premium All-you-can-eat (Wiener Neustadt)
+# Chen's Cooking — Premium All-you-can-eat (Sopron)
 
 A production-grade marketing website for **Chen's Cooking**: Sushi · Teppanyaki · Wok.
 Dark, cinematic, *premium-casual* — built for table reservations and walk-in conversion.
@@ -136,4 +136,4 @@ After deploy, set your real domain and update `metadataBase` in
 
 ---
 
-© Chen's Cooking · Wiener Neustadt
+© Chen's Cooking · Sopron
