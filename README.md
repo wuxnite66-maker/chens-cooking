@@ -137,3 +137,42 @@ After deploy, set your real domain and update `metadataBase` in
 ---
 
 © Chen's Cooking · Sopron
+
+---
+
+## VintFlow — KI-Assistent für Vinted-Inserate (`/vinted`)
+
+Ein eigenständiger Bereich der App unter **`/vinted`**: Aus Handyfotos entstehen
+in wenigen Schritten verkaufsfertige Vinted-Inserate. Läuft **sofort und ohne
+API-Key** (Demo-Modus), mit klar austauschbaren KI-Bausteinen.
+
+### Funktionen
+- **Foto-Upload** (Drag & Drop, mehrere Bilder) — bleibt komplett im Browser
+- **Hintergrund entfernen** (Canvas-Flood-Fill, wählbarer Hintergrund)
+- **Bild verbessern** (Auto-Helligkeit/Kontrast/Sättigung + Schärfen)
+- **Upscaling** (2× hochwertige Neuskalierung)
+- **Virtuelles Model** (Studio-Platzhalter, als Demo gekennzeichnet)
+- **Titel, Beschreibung, Tags, Kategorie & Preisvorschlag**
+- **Credits-System**, **Login/Registrierung**, **Einstellungen**, **Tipps**
+- **Export**: Text kopieren + bearbeitete Bilder herunterladen
+
+### Architektur
+| Teil | Ort |
+|------|-----|
+| Seiten & Wizard | `app/vinted/**` |
+| KI-Textgenerierung (API) | `app/api/vinted/generate/route.ts` |
+| Bildverarbeitung (Browser) | `lib/vinted/imaging.ts` |
+| Taxonomie / Regel-Generator | `lib/vinted/taxonomy.ts`, `lib/vinted/generate.ts` |
+| Store (Auth/Credits/Inserate) | `lib/vinted/store.tsx` |
+| UI-Bausteine | `components/vinted/**` |
+
+### KI austauschbar machen
+- **Texte:** Ohne `ANTHROPIC_API_KEY` wird ein regelbasierter Generator genutzt.
+  Mit Key schreibt Claude die Texte und wertet optional das Foto aus
+  (`VINTED_AI_MODEL` überschreibt das Modell).
+- **Bilder:** `lib/vinted/imaging.ts` kapselt jede Operation als Funktion —
+  hier lassen sich echte Dienste (z. B. remove.bg, Replicate, U²-Net im Browser)
+  einstecken, ohne die UI zu ändern.
+
+> **Hinweis:** Demo-Projekt, nicht mit Vinted verbunden. Konten, Credits und
+> Inserate liegen ausschließlich lokal im Browser (`localStorage`).
