@@ -5,12 +5,15 @@ import { createPortal } from "react-dom";
 import type { Content } from "@/content/site";
 
 // Rendered menu pages (food spreads 01–06, drinks 07). See public/menu/pages.
+// Two sizes: `view` (1700px) drives the book so page turns are instant, the
+// full 3400px original is only fetched for the fullscreen zoom.
+// MENU_VERSION busts browser caches whenever the card is re-issued.
 const PAGE_COUNT = 7;
-const PAGES = Array.from(
-  { length: PAGE_COUNT },
-  (_, i) => `/menu/pages/${String(i + 1).padStart(2, "0")}.jpg`,
-);
-const RATIO = 1.4057; // landscape leaf (matches the rendered pages, 3401x2418)
+const MENU_VERSION = "2026-01";
+const name = (i: number) => `${String(i + 1).padStart(2, "0")}.jpg`;
+const VIEW = Array.from({ length: PAGE_COUNT }, (_, i) => `/menu/pages/view/${name(i)}?v=${MENU_VERSION}`);
+const FULL = Array.from({ length: PAGE_COUNT }, (_, i) => `/menu/pages/${name(i)}?v=${MENU_VERSION}`);
+const RATIO = 1.4066; // landscape leaf (matches the rendered pages, 3401x2418)
 
 type Anim = { dir: "next" | "prev"; from: number; to: number };
 
@@ -33,6 +36,30 @@ export default function MenuFlipbookInner({ site }: { site: Content }) {
   const [index, setIndex] = useState(0);
   const [anim, setAnim] = useState<Anim | null>(null);
   const [zoom, setZoom] = useState<number | null>(null);
+
+  // Preload every book-sized page up front (~1.4 MB total) so turning a page
+  // never waits on the network. Neighbours first, then the rest.
+  useEffect(() => {
+    let cancelled = false;
+    const order = VIEW.map((_, i) => i).sort(
+      (a, b) => Math.abs(a - index) - Math.abs(b - index),
+    );
+    (async () => {
+      for (const i of order) {
+        if (cancelled) return;
+        await new Promise<void>((done) => {
+          const img = new Image();
+          img.onload = img.onerror = () => done();
+          img.src = VIEW[i];
+        });
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+    // run once on mount — `index` only seeds the preload order
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const go = (dir: "next" | "prev") => {
     if (anim) return;
@@ -81,10 +108,10 @@ export default function MenuFlipbookInner({ site }: { site: Content }) {
   // Base = page that stays; overlay = page that turns.
   const baseSrc = anim
     ? anim.dir === "next"
-      ? PAGES[anim.to]
-      : PAGES[anim.from]
-    : PAGES[index];
-  const overlaySrc = anim ? (anim.dir === "next" ? PAGES[anim.from] : PAGES[anim.to]) : null;
+      ? VIEW[anim.to]
+      : VIEW[anim.from]
+    : VIEW[index];
+  const overlaySrc = anim ? (anim.dir === "next" ? VIEW[anim.from] : VIEW[anim.to]) : null;
   const display = anim ? anim.to : index;
 
   return (
@@ -237,10 +264,17 @@ export default function MenuFlipbookInner({ site }: { site: Content }) {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={PAGES[zoom]}
+                src={FULL[zoom]}
                 alt={`${site.name} — ${ui.flipPage} ${zoom + 1}`}
                 className="mx-auto block h-auto rounded"
-                style={{ width: "min(1600px, max(100%, 1100px))" }}
+                style={{
+                  width: "min(1600px, max(100%, 1100px))",
+                  aspectRatio: `${RATIO}`,
+                  // already-cached small page shows instantly while the
+                  // full-resolution scan streams in on top
+                  backgroundImage: `url(${VIEW[zoom]})`,
+                  backgroundSize: "100% 100%",
+                }}
                 draggable={false}
               />
             </div>
