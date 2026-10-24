@@ -1,96 +1,138 @@
-# Kunden-Bestätigungsmails aktivieren — Schritt für Schritt
+# Reservierungs-Mails an 2 Adressen — Schritt für Schritt
 
-Damit **Reservierungs-Bestätigungen** und **Newsletter-Willkommensmails** auch bei
-den **Kunden** ankommen (nicht nur beim Restaurant), musst du in Resend **eine
-eigene Domain verifizieren**. Der Test-Absender `onboarding@resend.dev` darf
-nämlich nur an *deine eigene* Adresse senden — nicht an fremde Gäste.
+**Ziel:** Jede Reservierung landet bei **jinmarco17@gmail.com** *und* **chenssopron@gmail.com**.
 
-Dauer: ca. 10 Minuten + Wartezeit auf DNS (meist < 1 Stunde).
+**Warum es aktuell nicht geht:** Die Seite verschickt über Resends Test-Absender
+`onboarding@resend.dev`. Der darf **nur an die Konto-Adresse** (`wuxnite66@gmail.com`)
+zustellen — jede andere Adresse wird abgewiesen. Genau das war der Fehler
+„Etwas ist schiefgelaufen" im Formular.
 
-**Du brauchst:**
-- Zugang zu Resend (hast du schon).
-- Zugang zu den **DNS-Einträgen** deiner Domain `chenscooking.com`
-  (aktuell beim Anbieter **Silihost** — dort im Kundenpanel der „DNS-/Zonen-Editor").
+**Lösung:** Einmalig die Domain `chenscooking.com` in Resend freischalten.
+Danach darf an beliebige Adressen gesendet werden.
 
----
+- **Dauer:** ca. 10 Minuten + Wartezeit auf DNS (meist wenige Minuten, max. 1 Std.)
+- **Du brauchst:** Zugang zu **Resend** und zum **Silihost-Kundenpanel**
+  (dort liegt die DNS deiner Domain: Nameserver `ns1/ns2.silihost.hu`)
 
-## Schritt 1: Domain in Resend hinzufügen
-1. Gehe zu <https://resend.com> → einloggen.
-2. Links im Menü: **Domains** → Button **Add Domain**.
-3. Domain eingeben: **`chenscooking.com`** → Region wählen (z. B. **EU (Ireland)**) → **Add**.
+> Solange du das nicht gemacht hast, gehen **keine Buchungen verloren** — sie
+> landen über das eingebaute Sicherheitsnetz bei `wuxnite66@gmail.com`.
 
 ---
 
-## Schritt 2: Die DNS-Einträge kopieren
-Resend zeigt dir jetzt eine Liste mit **DNS-Einträgen** (meist 3–4 Stück), z. B.:
+## Schritt 1 — Die DNS-Einträge bei Silihost anlegen
 
-| Typ | Name/Host | Wert |
-|-----|-----------|------|
-| **MX** | `send` | `feedback-smtp.eu-west-1.amazonses.com` (Priorität 10) |
-| **TXT** | `send` | `v=spf1 include:amazonses.com ~all` |
-| **TXT** | `resend._domainkey` | `p=MIGf... (langer Schlüssel)` |
-| **TXT** | `_dmarc` *(optional)* | `v=DMARC1; p=none;` |
+Die Domain ist in Resend **bereits angelegt** (Status: *not_started*, d. h. es
+fehlen nur noch die DNS-Einträge).
 
-> ⚠️ **Nimm die Werte, die Resend DIR anzeigt** — sie sind pro Konto/Domain
-> unterschiedlich (vor allem der lange DKIM-Schlüssel). Die Tabelle oben ist nur
-> ein Beispiel.
+1. Bei **Silihost** einloggen → zu deiner Domain `chenscooking.com`
+   → **DNS-Zone / Zonen-Editor** öffnen.
+2. Dort **drei neue Einträge** anlegen — genau diese:
 
----
+### Eintrag 1 — DKIM (Signatur)
+| Feld | Wert |
+|---|---|
+| **Typ** | `TXT` |
+| **Name / Host** | `resend._domainkey` |
+| **Wert** | `p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD05sxSPa5n2y8/XlrBccadhSxZxKq+UR+9dqy7Q1NYT0WFJgthgfKN/f/NsJUztT59XXhR1a1lXGpjY4v98zZx6gfIN4v8K697RcXW9htqGULgAB+JGgQrnvkix+VUgPb7T/ny8U0fFYqlstq9qnsAiKoK/8SRR/l4XVPvrx/tlQIDAQAB` |
 
-## Schritt 3: DNS-Einträge bei Silihost eintragen
-1. Ins **Silihost-Kundenpanel** einloggen → **DNS-/Zonen-Editor** von `chenscooking.com`.
-2. Für **jeden** Eintrag aus Resend einen neuen DNS-Eintrag anlegen:
-   - **Typ** (MX oder TXT) exakt übernehmen.
-   - **Name/Host**: das, was Resend zeigt (z. B. `send` oder `resend._domainkey`).
-     - Falls Silihost die volle Adresse will, hänge deine Domain an:
-       `send.chenscooking.com`, `resend._domainkey.chenscooking.com`.
-   - **Wert/Ziel**: exakt kopieren (der DKIM-Schlüssel ist sehr lang — komplett).
-   - Beim **MX**-Eintrag zusätzlich die **Priorität** (z. B. 10) setzen.
+### Eintrag 2 — MX (Rückmeldungen)
+| Feld | Wert |
+|---|---|
+| **Typ** | `MX` |
+| **Name / Host** | `send` |
+| **Wert / Ziel** | `feedback-smtp.eu-west-1.amazonses.com` |
+| **Priorität** | `10` |
+
+### Eintrag 3 — SPF (Absender-Erlaubnis)
+| Feld | Wert |
+|---|---|
+| **Typ** | `TXT` |
+| **Name / Host** | `send` |
+| **Wert** | `v=spf1 include:amazonses.com ~all` |
+
+> **Wichtig zum Feld „Name":**
+> Manche Panels wollen den Namen **relativ** (`resend._domainkey`), andere
+> **komplett** (`resend._domainkey.chenscooking.com`). Wenn Silihost die Domain
+> automatisch anhängt, nimm die **kurze** Variante — sonst steht am Ende
+> doppelt `...chenscooking.com.chenscooking.com`.
+>
+> Den DKIM-Wert bitte **in einem Stück** kopieren, ohne Zeilenumbruch.
+> Falls das Panel Anführungszeichen verlangt: `"p=MIGf..."`.
+>
+> Der MX-Eintrag auf `send` stört deine normalen E-Mails **nicht** — er gilt nur
+> für die Unter-Adresse `send.chenscooking.com`.
+
 3. Speichern.
 
-> 💡 Deine bestehenden E-Mail-Einträge (falls du @chenscooking.com-Postfächer hast)
-> NICHT löschen — nur die neuen Resend-Einträge zusätzlich anlegen.
+---
+
+## Schritt 2 — In Resend verifizieren
+
+1. <https://resend.com/domains> öffnen → auf **chenscooking.com** klicken.
+2. Button **Verify DNS Records** drücken.
+3. Nach ein paar Minuten sollten alle drei Einträge auf **grün / „Verified"** stehen.
+   - Steht noch etwas auf „Pending": kurz warten und nochmal auf *Verify* klicken.
+
+👉 **Sag mir an dieser Stelle kurz Bescheid** — ich kann den Status direkt über die
+Resend-API prüfen und dir sagen, ob wirklich alles sauber verifiziert ist.
 
 ---
 
-## Schritt 4: In Resend verifizieren
-1. Zurück in Resend → bei der Domain auf **Verify** klicken.
-2. Status wird **grün / „Verified"**, sobald die DNS-Einträge sichtbar sind
-   (meist wenige Minuten, manchmal bis zu 1 Stunde). Einfach später nochmal auf
-   **Verify** drücken.
+## Schritt 3 — Die Empfänger bei Vercel eintragen
+
+Die Live-Seite liest ihre Einstellungen **nicht** aus dem Projektordner, sondern aus
+den Vercel-Umgebungsvariablen.
+
+1. <https://vercel.com> → Projekt **chens-cooking** → **Settings** →
+   **Environment Variables**.
+2. Diese drei Variablen setzen (vorhandene bearbeiten, fehlende neu anlegen) —
+   Environment jeweils **Production** (gern zusätzlich Preview):
+
+| Name | Wert |
+|---|---|
+| `RESERVATION_TO` | `jinmarco17@gmail.com,chenssopron@gmail.com` |
+| `RESERVATION_FROM` | `Chen's Cooking <reservierung@chenscooking.com>` |
+| `RESERVATION_FALLBACK_TO` | `wuxnite66@gmail.com` |
+
+> - Bei `RESERVATION_TO` die beiden Adressen **mit Komma** trennen.
+> - `RESERVATION_FROM` darf erst **nach** erfolgreicher Verifizierung auf
+>   `@chenscooking.com` umgestellt werden. Vorher bleibt dort
+>   `Chen's Cooking <onboarding@resend.dev>` stehen.
+> - `RESERVATION_FALLBACK_TO` ist das Sicherheitsnetz: Falls der Versand an die
+>   beiden Adressen scheitert, geht die Buchung dorthin, statt verloren zu gehen.
+
+3. **Wichtig:** Änderungen an Variablen wirken **erst nach einem neuen Deployment**.
+   → Tab **Deployments** → beim neuesten Eintrag auf **…** → **Redeploy**.
 
 ---
 
-## Schritt 5: Absender-Adresse in Vercel setzen
-1. <https://vercel.com> → Projekt **chens-cooking** → **Settings → Environment Variables**.
-2. Variable **`RESERVATION_FROM`** anlegen/ändern auf eine Adresse **deiner
-   verifizierten Domain**, z. B.:
-   ```
-   Chen's Cooking <info@chenscooking.com>
-   ```
-   (Der Teil vor dem @ ist frei wählbar — `info`, `hallo`, `reservierung` …;
-   das Postfach muss dafür nicht existieren, die Domain muss nur verifiziert sein.)
-3. **Save** → oben **Deployments → Redeploy**.
+## Schritt 4 — Testen
+
+1. Auf <https://chenscooking.com/at/reservieren> eine Test-Reservierung absenden.
+2. Erwartung:
+   - Im Formular erscheint die **grüne Bestätigung** (kein roter Fehler mehr).
+   - Die Mail liegt in **beiden** Postfächern.
+   - Gibst du beim Test eine eigene E-Mail an, bekommst du zusätzlich die
+     **Gast-Bestätigungsmail** — die funktioniert ebenfalls erst mit verifizierter Domain.
 
 ---
 
-## Schritt 6: Testen
-1. Auf der Website eine **Reservierung** mit **deiner eigenen** E-Mail absenden.
-2. Du solltest **zwei** Mails bekommen:
-   - die **Benachrichtigung ans Restaurant** (an `RESERVATION_EMAIL`),
-   - die **Bestätigung an den Gast** (an die eingegebene Adresse).
-3. Ebenso beim **Newsletter**: nach der Anmeldung kommt die Willkommens-Mail.
+## Wenn du an die Silihost-DNS nicht rankommst
 
-Fertig! Ab jetzt bekommt jeder Gast automatisch seine Bestätigung. 🎉
+Dann geht es auch **ohne DNS**: Anbieter wie **Brevo** oder **SendGrid** erlauben
+die Freischaltung **einer einzelnen Absender-Adresse** per Bestätigungs-Link
+(z. B. `chenssopron@gmail.com`). Danach darf an beliebige Empfänger gesendet werden.
+
+Sag einfach Bescheid — dann baue ich den Versand auf diesen Weg um.
 
 ---
 
-## Häufige Fehler
-- **„Domain not verified" bleibt:** DNS-Eintrag falsch/unvollständig kopiert
-  (v. a. der lange DKIM-TXT) oder Name/Host falsch. Werte 1:1 aus Resend prüfen.
-- **Kunde bekommt nichts, Restaurant schon:** `RESERVATION_FROM` zeigt noch auf
-  `onboarding@resend.dev` → auf die verifizierte Domain umstellen (Schritt 5) +
-  Redeploy.
-- **Nach DNS-Umzug** (falls du `chenscooking.com` später ganz auf die neue Seite
-  umstellst): Die Resend-Einträge müssen dort liegen, wo die DNS **aktiv**
-  verwaltet wird. Änderst du die Nameserver, die Resend-Records dort neu anlegen.
+## Spickzettel
+
+| | |
+|---|---|
+| Domain | `chenscooking.com` (in Resend angelegt, Region EU) |
+| DNS-Anbieter | Silihost (`ns1.silihost.hu`, `ns2.silihost.hu`) |
+| Fehlende Einträge | TXT `resend._domainkey` · MX `send` · TXT `send` |
+| Empfänger neu | `jinmarco17@gmail.com`, `chenssopron@gmail.com` |
+| Aktueller Notfall-Empfänger | `wuxnite66@gmail.com` |
