@@ -223,9 +223,22 @@ export async function POST(req: Request) {
   const rawKey = process.env.RESEND_API_KEY?.trim();
   const apiKey =
     rawKey && rawKey.startsWith("re_") && !rawKey.includes("PASTE") ? rawKey : undefined;
-  const toRaw =
-    process.env.RESERVATION_TO || process.env.RESERVATION_EMAIL || site.contact.email;
-  const to = toRaw.split(",").map((s) => s.trim()).filter(Boolean);
+  // RESERVATION_TO may list several inboxes, comma- or semicolon-separated.
+  const parseList = (v?: string) =>
+    (v ?? "")
+      .split(/[,;]/)
+      .map((s) => s.trim())
+      .filter((s) => EMAIL_RE.test(s));
+  const to = parseList(
+    process.env.RESERVATION_TO || process.env.RESERVATION_EMAIL || site.contact.email,
+  );
+  if (!to.length) to.push(site.contact.email);
+  // Safety net: while the sending domain is still unverified in Resend, the
+  // shared test sender can only deliver to the account's own address. If the
+  // real inboxes are rejected we retry here so a booking is never lost.
+  const fallbackTo = parseList(process.env.RESERVATION_FALLBACK_TO).filter(
+    (a) => !to.includes(a),
+  );
   const from = process.env.RESERVATION_FROM || `${site.name} <onboarding@resend.dev>`;
   const { html, text } = buildEmail(data);
   const subject = `Neue Reservierung – ${data.name}, ${formatDate(data.date)} um ${data.time} (${data.guests} P.)`;
@@ -241,14 +254,27 @@ export async function POST(req: Request) {
 
   try {
     const resend = new Resend(apiKey);
-    const { error } = await resend.emails.send({
-      from,
-      to,
-      replyTo: data.email || undefined,
-      subject,
-      html,
-      text,
-    });
+    const notify = (recipients: string[]) =>
+      resend.emails.send({
+        from,
+        to: recipients,
+        replyTo: data.email || undefined,
+        subject,
+        html,
+        text,
+      });
+
+    let { error } = await notify(to);
+
+    if (error && fallbackTo.length) {
+      // Most likely cause: unverified domain + shared test sender, which Resend
+      // only delivers to the account owner. Re-send there so the restaurant
+      // still gets the booking, and make the real cause obvious in the logs.
+      console.error(
+        `[reservation] delivery to ${to.join(", ")} failed (${error.message}) — retrying via fallback ${fallbackTo.join(", ")}`,
+      );
+      ({ error } = await notify(fallbackTo));
+    }
 
     if (error) {
       console.error("[reservation] Resend error:", error);

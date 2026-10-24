@@ -73,11 +73,16 @@ export async function POST(req: Request) {
   const rawKey = process.env.RESEND_API_KEY?.trim();
   const apiKey =
     rawKey && rawKey.startsWith("re_") && !rawKey.includes("PASTE") ? rawKey : undefined;
-  const to =
+  // May list several inboxes, comma- or semicolon-separated.
+  const to = (
     process.env.NEWSLETTER_TO ||
     process.env.RESERVATION_TO ||
     process.env.RESERVATION_EMAIL ||
-    site.contact.email;
+    site.contact.email
+  )
+    .split(/[,;]/)
+    .map((s) => s.trim())
+    .filter(Boolean);
   const from = process.env.RESERVATION_FROM || `${site.name} <onboarding@resend.dev>`;
   const subject = `Newsletter-Anmeldung – ${email}`;
   const text = `Neue Newsletter-Anmeldung\n\nE-Mail: ${email}\nGeburtstag: ${birthday || "—"}\nSprache: ${data.locale || "—"}`;
