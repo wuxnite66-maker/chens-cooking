@@ -1,0 +1,13 @@
+{
+  "name": "ue06",
+  "version": "1.0.0",
+  "description": "UE06: Klassen vs. Interfaces",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/main.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
