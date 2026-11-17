@@ -69,6 +69,20 @@ const jsonLd = {
   },
   openingHours: "Mo-We,Fr-Su 11:30-22:00",
   url: "https://www.chenscooking.com",
+  acceptsReservations: "https://www.chenscooking.com/at/reservieren",
+  potentialAction: {
+    "@type": "ReserveAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://www.chenscooking.com/at/reservieren",
+      inLanguage: "de-AT",
+      actionPlatform: [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform",
+      ],
+    },
+    result: { "@type": "FoodEstablishmentReservation", name: "Tisch reservieren" },
+  },
 };
 
 export default function RootLayout({
