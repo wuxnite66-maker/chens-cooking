@@ -50,6 +50,11 @@ export const de = {
     label: "Öffnungszeiten",
     range: "11:30 – 22:00",
     note: "Donnerstag Ruhetag.",
+    // Seasonal closing notice — shown with the opening hours and in the popup.
+    closure: {
+      title: "Weihnachten 2026",
+      text: "Am 24. & 25. Dezember geschlossen",
+    },
     days: [
       { day: "Montag", time: "11:30 – 22:00" },
       { day: "Dienstag", time: "11:30 – 22:00" },

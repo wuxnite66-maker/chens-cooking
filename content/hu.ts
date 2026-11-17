@@ -44,6 +44,10 @@ export const hu: Content = {
     label: "Nyitvatartás",
     range: "11:30 – 22:00",
     note: "Csütörtökön zárva.",
+    closure: {
+      title: "Karácsony 2026",
+      text: "December 24-én és 25-én zárva",
+    },
     days: [
       { day: "Hétfő", time: "11:30 – 22:00" },
       { day: "Kedd", time: "11:30 – 22:00" },

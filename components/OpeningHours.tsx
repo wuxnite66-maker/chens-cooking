@@ -3,6 +3,15 @@
 import { useEffect, useState } from "react";
 import type { Content } from "@/content/site";
 
+function TreeIcon() {
+  return (
+    <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-gold-soft" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3 7.5 9h2.6L6.5 14.5h3.2L6 20h12l-3.7-5.5h3.2L13.9 9h2.6L12 3Z" />
+      <path d="M11 20v2h2v-2" />
+    </svg>
+  );
+}
+
 function ClockIcon() {
   return (
     <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 text-gold" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -131,6 +140,19 @@ export function OpeningHours({ site }: { site: Content }) {
             );
           })}
         </ul>
+
+        {/* Seasonal closing notice (e.g. Christmas) */}
+        {hours.closure && (
+          <div className="mt-4 flex items-center gap-3 rounded-lg border border-[rgba(201,162,75,0.4)] bg-[rgba(201,162,75,0.09)] px-3.5 py-3">
+            <TreeIcon />
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-gold-soft">
+                {hours.closure.title}
+              </p>
+              <p className="text-sm font-medium text-cream">{hours.closure.text}</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

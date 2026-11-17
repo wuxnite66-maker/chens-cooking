@@ -124,6 +124,21 @@ export function NewsletterPopup({ site }: { site: Content }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/chens-logo.png" alt={site.name} className="mx-auto h-14 w-auto" draggable={false} />
 
+          {/* On phones the festive side panel is hidden, so carry the notice here. */}
+          {site.hours.closure && (
+            <div className="mt-5 flex items-center justify-center gap-2.5 rounded-lg border border-[rgba(201,162,75,0.4)] bg-[rgba(201,162,75,0.09)] px-3 py-2.5 text-center sm:hidden">
+              <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-gold-soft" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 3 7.5 9h2.6L6.5 14.5h3.2L6 20h12l-3.7-5.5h3.2L13.9 9h2.6L12 3Z" />
+                <path d="M11 20v2h2v-2" />
+              </svg>
+              <span className="text-sm">
+                <span className="font-semibold text-gold-soft">{site.hours.closure.title}</span>
+                <span className="mx-1.5 text-muted">·</span>
+                <span className="font-medium text-cream">{site.hours.closure.text}</span>
+              </span>
+            </div>
+          )}
+
           {status === "success" ? (
             <div className="mt-8 flex flex-col items-center py-6 text-center">
               <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gold/15 text-2xl text-gold">
