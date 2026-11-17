@@ -51,6 +51,20 @@ export function Splash() {
     return () => clearTimeout(t);
   }, [reduce]);
 
+  // Seasonal notice — pops in once the opening animation has settled.
+  const [notice, setNotice] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setNotice(true), reduce ? 400 : 2600);
+    return () => clearTimeout(t);
+  }, [reduce]);
+
+  useEffect(() => {
+    if (!notice) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setNotice(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [notice]);
+
   // Exit curtain: clicking a language closes the curtain, then navigates.
   const router = useRouter();
   const [leaving, setLeaving] = useState<string | null>(null);
@@ -349,6 +363,49 @@ export function Splash() {
           ))}
         </div>
       </motion.footer>
+
+      {/* ---- Seasonal notice, pops in over the language gate ---- */}
+      {notice && !leaving && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-5 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label={hours.closure?.title ?? "Info"}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.35 }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setNotice(false);
+          }}
+        >
+          <motion.div
+            className="relative w-full max-w-[340px] sm:max-w-[400px]"
+            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.86, y: 26 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={
+              reduce
+                ? { duration: 0.3 }
+                : { type: "spring", stiffness: 220, damping: 20, mass: 0.8 }
+            }
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/newsletter-xmas-bi.jpg"
+              alt="Chen's Cooking — 24. & 25. Dezember 2026 geschlossen · zárva"
+              className="w-full rounded-xl border border-[rgba(201,162,75,0.45)] shadow-2xl shadow-black/70"
+              draggable={false}
+            />
+            <button
+              type="button"
+              onClick={() => setNotice(false)}
+              aria-label="Schließen · Bezárás"
+              className="absolute -right-3 -top-3 flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(201,162,75,0.5)] bg-[rgba(12,11,9,0.95)] text-lg text-gold shadow-lg transition-colors hover:bg-gold hover:text-onAccent"
+            >
+              ✕
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
 
       {/* ---- Exit curtain: closes over the page, then navigates ---- */}
       {leaving && (
