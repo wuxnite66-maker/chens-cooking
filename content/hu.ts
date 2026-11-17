@@ -37,6 +37,7 @@ export const hu: Content = {
     text: "Rendeld az elsőt — utána minden ital ingyenes!",
     price: "8590 Ft",
     href: "/hu/reservieren",
+    poster: "/images/newsletter-hu.jpg",
   },
 
   hours: {
@@ -359,8 +360,8 @@ export const hu: Content = {
   },
 
   newsletter: {
-    image: "/images/newsletter-hu.jpg",
-    imageAlt: "Chen's Cooking — Happy Night",
+    image: "/images/newsletter-xmas-hu.jpg",
+    imageAlt: "Chen's Cooking — 2026. december 24-én és 25-én zárva",
     h1: "HAPPY NIGHT & HÍREK",
     h2: "ELSŐKÉNT ÉRTESÜLJ",
     sub: "Akciók, új fogások és minden Happy Night — egyenesen a postafiókodba.",

@@ -41,6 +41,9 @@ export const de = {
     text: "1. Getränk bestellen — danach ist jedes weitere gratis!",
     price: "8590 Ft",
     href: "/at/reservieren",
+    // Poster beside the hero text — stays the Happy Night artwork even while
+    // the newsletter panel shows a seasonal notice.
+    poster: "/images/newsletter-de.jpg",
   },
 
   hours: {
@@ -364,8 +367,8 @@ export const de = {
 
   // UI micro-copy (buttons, labels, aria) used across components
   newsletter: {
-    image: "/images/newsletter-de.jpg",
-    imageAlt: "Chen's Cooking — Happy Night",
+    image: "/images/newsletter-xmas-de.jpg",
+    imageAlt: "Chen's Cooking — am 24. und 25. Dezember 2026 geschlossen",
     h1: "HAPPY NIGHT & NEWS",
     h2: "ALS ERSTES ERFAHREN",
     sub: "Aktionen, neue Gerichte & jede Happy Night — direkt in dein Postfach.",

@@ -158,7 +158,7 @@ export function Hero({ site }: { site: Content }) {
               className="group relative block aspect-[1080/1350] w-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl shadow-black/70 ring-1 ring-black/50 transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.03] hover:border-gold/80 hover:shadow-[0_30px_70px_-18px_rgba(201,162,75,0.5)]"
             >
               <Image
-                src={site.newsletter.image}
+                src={promo.poster}
                 alt=""
                 fill
                 sizes="380px"
